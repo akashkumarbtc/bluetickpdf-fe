@@ -7,9 +7,16 @@
     <title>BluetickPDF</title>
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" href='static/dist/css/style.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 </head>
+<style>
+    .features-inner .feature p {
+        text-align: left;
+    }
+</style>
+
 <body class="is-boxed has-animations">
     <div class="body-wrap">
         <header class="site-header">
@@ -18,7 +25,7 @@
                     <div class="brand header-brand">
                         <h1 class="m-0">
 							<a href="/">
-                                <img class="header-logo-image" src="static/dist/images/blueticklogo.png" alt="Logo" style="mix-blend-mode: screen; transform: scale(1.0)">
+                                <img class="header-logo-image" src="static/dist/images/blueticklogo.png" alt="Logo" style="mix-blend-mode: screen; transform: scale(1.0);">
                             </a>
                             
                         </h1>
@@ -31,9 +38,9 @@
             <section class="hero">
                 <div class="container">
                     <div class="hero-inner">
-						<div class="hero-copy">
+						<div class="hero-copy" >
 	                        <h1 class="hero-title mt-0">Analyze and Query over your PDF using BluetickPDF</h1>
-	                        <p class="hero-paragraph">The combination of natural language processing, machine learning, and advanced search technologies empowers us to unlock the hidden gems within PDFs and gain a deeper understanding of the written word. </p>
+	                        <p class="hero-paragraph">Discover hidden gems in PDFs with our powerful blend of natural language processing, machine learning and advanced search technologies, gaining profound insights into the written word. </p>
 	                        <div class="hero-cta"><a class="button button-primary" href="login.html">Get Started</a><a class="button" href="https://www.bluetickconsultants.com/">Get in touch</a></div>
 						</div>
 						<div class="hero-figure anime-element">
@@ -56,45 +63,43 @@
             </section>
 
             <section class="features section">
-                <div class="container">
-                    <h2 style="text-align:center">How to use BluetickPDF</h2>
+                <div class="container" >
+                    <h2 style="text-align: center;">A quick guide to use BluetickPDF</h2>
                     <div class="features-inner section-inner has-bottom-divider">
-                        
-                        <div class="features-wrap">
-                            
+                        <div class="features-wrap d-flex justify-content-center">
                             <div class="feature text-center is-revealing">
                                 <div class="feature-inner">
                                     <div class="feature-icon">
                                         <img src="static/dist/images/feature-icon-01.svg" alt="Feature 01">
                                     </div>
-                                    <h4 class="feature-title mt-24">Login:</h4>
-                                    <p class="text-sm mb-0">Logging in becomes effortless with BluetickPDF. Say goodbye to the inconvenience of creating a new account and forgetting passwords. Now, you can simply log in using your Google account.</p>
+                                    <h4 class="feature-title mt-24">Login</h4>
+                                    <p class="hero-paragraph">Logging in is effortless with BluetickPDF. Say goodbye to account creation and password hassles. Simply log in using your Google account.</p>
                                 </div>
                             </div>
                             <div class="feature text-center is-revealing">
                                 <div class="feature-inner">
                                     <div class="feature-icon">
-                                        <img src="static/dist/images/feature-icon-01.svg" alt="Feature 01">
+                                        <img src="static/dist/images/feature-icon-02.svg" alt="Feature 01">
                                     </div>
-                                    <h4 class="feature-title mt-24">Upload your PDF.</h4>
+                                    <h4 class="feature-title mt-24">Upload your PDF</h4>
                                     <p class="text-sm mb-0">Whether you have scientific papers, academic articles, books, manuals, or training materials, you can easily upload your PDF documents to BluetickPDF. Just drag and drop your PDF file.</p>
                                 </div>
                             </div>
                             <div class="feature text-center is-revealing">
                                 <div class="feature-inner">
                                     <div class="feature-icon">
-                                        <img src="static/dist/images/feature-icon-02.svg" alt="Feature 02">
+                                        <img src="static/dist/images/feature-icon-03.svg" alt="Feature 02">
                                     </div>
-                                    <h4 class="feature-title mt-24">Query Functionality.</h4>
+                                    <h4 class="feature-title mt-24">Query Functionality</h4>
                                     <p class="text-sm mb-0">Ask BluetickPDF any question related to your PDFs, and we will provide you with the answers you need.</p>
                                 </div>
                             </div>
                             <div class="feature text-center is-revealing">
                                 <div class="feature-inner">
                                     <div class="feature-icon">
-                                        <img src="static/dist/images/feature-icon-03.svg" alt="Feature 03">
+                                        <img src="static/dist/images/feature-icon-04.svg" alt="Feature 03">
                                     </div>
-                                    <h4 class="feature-title mt-24">Enhanced Security.</h4>
+                                    <h4 class="feature-title mt-24">Enhanced Security</h4>
                                     <p class="text-sm mb-0">Rest assured that your files will not be stored anywhere. Furthermore, all your data will be deleted once you log out from the website.</p>
                                 </div>
                             </div>
@@ -102,6 +107,8 @@
                     </div>
                 </div>
             </section>
+            
+            
 
             <section class="pricing section">
                 <div class="container-sm">
@@ -215,11 +222,17 @@
                                     </g>
                                 </svg>
                             </a>
-                            
-                            
-                            
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/officialbluetickconsultants/?hl=en" target="_blank">
+                                <span class="screen-reader-text">Instagram</span>
+                                <i class="fa-brands fa-instagram" style="font-size: 20px; color:#0270D7"></i>
+                            </a>
                         </li>
                     </ul>
+                    
+                    
+                    
                     <div class="footer-copyright"> 2023 © All rights reserved by Bluetick Consultants LLP</div>
                 </div>
             </div>
