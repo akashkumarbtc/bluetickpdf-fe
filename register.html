@@ -240,9 +240,10 @@
 </div>
 
 <script src="static/dist/js/main.min.js"></script>
+<script src="static/dist/js/base_url.js"></script>
 <script>
 
-    var baseURL = localStorage.getItem('baseURL');
+    // var baseURL = localStorage.getItem('baseURL');
 
     
     $('.register-form-fields').submit(function (e) {
@@ -258,7 +259,7 @@
             };
             console.log(data)
 
-            fetch(baseURL = '/register', {
+            fetch(base_url + '/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

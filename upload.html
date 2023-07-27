@@ -310,9 +310,9 @@
         </div>
     </div>
     <div class="overlay" id="overlay"></div>
-
+    <script src="static/dist/js/base_url.js"></script>
     <script>
-      var baseURL = localStorage.getItem('baseURL');
+      // var baseURL = localStorage.getItem('baseURL');
 
       function updateFileName(input) {
         const fileName = input.files[0].name;
@@ -365,7 +365,7 @@
         headers.append("Authorization", token);
 
         showLoadingSpinner();
-        fetch(baseURL + '/upload', {
+        fetch(base_url + '/upload', {
           method: "POST",
           headers: headers,
           body: formData,

@@ -1,3 +1,4 @@
+
 const query = (obj) =>
   Object.keys(obj)
     .map((k) => encodeURIComponent(k) + "=" + encodeURIComponent(obj[k]))
@@ -10,7 +11,7 @@ const spinner = box_conversations.querySelector(".spinner");
 const stop_generating = document.querySelector(".stop_generating");
 const send_button = document.querySelector("#send-button");
 let prompt_lock = false;
-var baseURL = localStorage.getItem('baseURL');
+// var baseURL = localStorage.getItem('baseURL');
 
 const format = (text) => {
   return text.replace(/(?:\r\n|\r|\n)/g, "<br>");
@@ -106,7 +107,7 @@ const ask_gpt = async (message) => {
     window.scrollTo(0, 0);
     // const csrfToken = document.querySelector('input[name="csrf_token"]').value;
     console.log("im herererer eeeeeeeeeeee");
-    const response = await fetch(baseURL + `/ask`, {
+    const response = await fetch(base_url + `/ask`, {
       method: `POST`,
       signal: window.controller.signal,
       headers: {

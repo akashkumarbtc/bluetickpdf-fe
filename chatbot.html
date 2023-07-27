@@ -17,6 +17,7 @@
     <link rel="manifest" href="static/dist/images/site.webmanifest">
     <script src="static/dist/js/icons.js"></script>
     <script src="static/dist/js/chat.js" defer></script>
+    <script src="static/dist/js/base_url.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/base16/dracula.min.css">
     <script>
@@ -76,8 +77,9 @@
         }
     </style>
     <script src="static/dist/js/highlight.min.js"></script>
+    <script src="static/dist/js/base_url.js"></script>
     <script>
-        var baseURL = localStorage.getItem('baseURL');
+        // var baseURL = localStorage.getItem('baseURL');
         window.conversation_id = `{{ chat_id }}`;
         const messagesElement = document.getElementById("messages");
         const messageInput = document.getElementById("message-input");
@@ -95,7 +97,7 @@
                 // const csrfToken = document.querySelector('input[name="csrf_token"]').value;
 
                 // Send the message and CSRF token to the server
-                fetch(baseURL + "/ask", {
+                fetch(base_url + "/ask", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

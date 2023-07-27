@@ -261,8 +261,9 @@
 </div>
 
 <script src="static/dist/js/main.min.js"></script>
+<script src="static/dist/js/base_url.js"></script>
 <script>
-    var baseURL = localStorage.getItem('baseURL');
+    // var baseURL = localStorage.getItem('baseURL');
 
 
     $('form').submit(function (e) {
@@ -278,7 +279,7 @@
         };
         console.log(data)
 
-        fetch(baseURL + '/login', {
+        fetch(base_url + '/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
