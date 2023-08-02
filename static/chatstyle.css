@@ -16,19 +16,58 @@
 } */
 
 :root {
-    --colour-1: #000000;
+    /* Light mode colors */
+    --colour-1: lightblue;
     --colour-2: #ccc;
-    --colour-3: #e4d4ff;
+    --colour-3: black;
     --colour-4: #f0f0f0;
     --colour-5: #181818;
     --colour-6: #242424;
 
-    --accent: darkblue;
-    --blur-bg: #16101b66;
-    --blur-border: #709184;
-    --user-input: #00008b;
-    --conversations: #709184;
+    --accent: #00008b;
+    --blur-bg: white;
+    --blur-border: black;
+    --user-input: black;
+    --conversations: black;
 }
+
+:root:not(.dark-mode) {
+    /* Light mode styles */
+    /* You can leave this empty or specify additional light mode styles here */
+}
+
+.dark-mode {
+    /* Dark mode colors */
+    --colour-1: #000000;
+    --colour-2: #ccc;
+    --colour-3: white;
+    --colour-4: #181818;
+    --colour-5: #f0f0f0;
+    --colour-6: #e4d4ff;
+
+    --accent: darkblue;
+    --blur-bg: #242830;
+    --blur-border: lightblue;
+    --user-input: #00008b;
+    --conversations: lightblue;
+}
+
+/* Common styles for both light and dark modes */
+
+/* Add any other shared styles here */
+
+/* Example: */
+.hljs {
+    color: var(--colour-1); /* This will use the respective color depending on light/dark mode */
+    background: #28293629;
+    border-radius: var(--border-radius-1);
+    border: 1px solid var(--blur-border);
+    font-size: 15px;
+}
+
+/* Rest of the CSS remains the same */
+
+
 
 :root {
     --font-1: "Inter", sans-serif;
@@ -332,49 +371,93 @@ body {
     display: none;
 }
 
-input[type="checkbox"] {
-    height: 0;
-    width: 0;
-    display: none;
-}
-
-label {
-    cursor: pointer;
-    text-indent: -9999px;
-    width: 50px;
-    height: 30px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background-color: var(--blur-bg);
-    border-radius: var(--border-radius-1);
-    border: 1px solid var(--blur-border);
-    display: block;
-    border-radius: 100px;
+/* Styles for the toggle switch */
+.toggle-switch {
+    display: inline-block;
     position: relative;
-    overflow: hidden;
-    transition: 0.33s;
-}
-
-label:after {
-    content: "";
+    width: 64px;
+    height: 40px;
+    
+  }
+  
+  /* Hide the checkbox */
+  .toggle-switch input {
+    display: none;
+  }
+  
+  /* Styles for the switch track */
+  .toggle-switch .switch {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 5px;
-    width: 20px;
-    height: 20px;
-    background: var(--colour-3);
-    border-radius: 90px;
-    transition: 0.33s;
-}
-
-input:checked+label {
-    background: var(--blur-border);
-}
-
-input:checked+label:after {
-    left: calc(100% - 5px - 20px);
-}
+    top: 0;
+    left: 0;
+    width: 64px;
+    height: 32px;
+    border-radius: 16px;
+    background-color: #242830; /* Default switch color */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Styles for the switch thumb */
+  .toggle-switch input:checked + .switch {
+    background-color: #097dea; /* Switch color in light mode */
+    width: 32px; /* Set the width of the thumb */
+    height: 32px; /* Set the height of the thumb */
+    border-radius: 50%; /* Make the thumb circular */
+  }
+  
+  /* Styles for the thumb icon (optional) */
+  .toggle-switch .icon {
+    position: absolute;
+    top: 3px;
+    font-size: 18px;
+    color: #fff; /* Icon color */
+    transition: transform 0.3s ease;
+  }
+  
+  /* Moon and sun icons */
+  .toggle-switch .icon.moon {
+    left: 8px;
+    transform: scale(1.25);
+  }
+  
+  .toggle-switch .icon.sun {
+    right: 8px;
+    transform: scale(0);
+  }
+  
+  /* Show sun icon in light mode */
+  .toggle-switch input:checked + .switch .icon.moon {
+    transform: scale(0);
+  }
+  
+  .toggle-switch input:checked + .switch .icon.sun {
+    transform: scale(1);
+  }
+  
+  /* Dark mode styles */
+  .dark-mode .toggle-switch .switch {
+    background-color: #0270d7 ;
+  }
+  
+  .dark-mode .toggle-switch input:checked + .switch {
+    background-color: #1b1d23;
+  }
+  
+  .dark-mode .toggle-switch .icon {
+    color: lightblue;
+  }
+  
+  .dark-mode .toggle-switch .icon.moon {
+    left: 8px;
+    transform: scale(1);
+  }
+  
+  .dark-mode .toggle-switch .icon.sun {
+    right: 8px;
+    transform: scale(0);
+  }
+  
 
 .buttons {
     display: flex;

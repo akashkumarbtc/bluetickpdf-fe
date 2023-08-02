@@ -10,14 +10,110 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
-</head>
-<style>
-    .features-inner .feature p {
-        text-align: left;
+    <style>
+        
+        .features-inner .feature p {
+            text-align: left;
+        }
+    /* Styles for the toggle switch */
+    .toggle-switch {
+      display: inline-block;
+      position: relative;
+      width: 48px;
+      height: 34px;
+      margin: -50px 280px;
     }
+    
+    /* Hide the checkbox */
+    .toggle-switch input {
+      display: none;
+    }
+    
+    /* Styles for the switch track */
+    .toggle-switch .switch {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 48px;
+      height: 24px;
+      border-radius: 12px;
+      background-color: #242830; /* Default switch color */
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    /* Styles for the switch thumb */
+    .toggle-switch input:checked + .switch {
+      background-color: #097dea; /* Switch color in light mode */
+    }
+    
+    /* Styles for the thumb icon (optional) */
+    .toggle-switch .icon {
+      position: absolute;
+      top: -3px;
+      font-size: 18px;
+      color: #fff; /* Icon color */
+      transition: transform 0.3s ease;
+    }
+    
+    /* Moon and sun icons */
+    .toggle-switch .icon.moon {
+      left: 4px;
+    }
+    
+    .toggle-switch .icon.sun {
+      right: 4px;
+      transform: scale(0);
+    }
+    
+    /* Show sun icon in light mode */
+    .toggle-switch input:checked + .switch .icon.moon {
+      transform: scale(0);
+    }
+    
+    .toggle-switch input:checked + .switch .icon.sun {
+      transform: scale(1);
+    }
+    
+    /* Dark mode styles */
+    .dark-mode .toggle-switch .switch {
+      background-color: #0270d7 ;
+    }
+    
+    .dark-mode .toggle-switch input:checked + .switch {
+      background-color: #1b1d23;
+    }
+    
+    .dark-mode .toggle-switch .icon {
+      color: lightblue;
+    }
+    
+    .dark-mode .toggle-switch .icon.moon {
+      left: 4px;
+      transform: scale(1);
+    }
+    
+    .dark-mode .toggle-switch .icon.sun {
+      right: 4px;
+      transform: scale(0);
+    }
+    body:not(.dark-mode), .section-title:not(.dark-mode),.feature-title:not(.dark-mode){
+        color: #000;
+    }
+    .section-title:not(.dark-mode),.feature-title:not(.dark-mode){
+        color: #0270d7 ;
+    }
+
+    
 </style>
 
-<body class="is-boxed has-animations">
+  
+</head>
+
+
+
+
+<body class="is-boxed has-animations" id="body">
     <div class="body-wrap">
         <header class="site-header">
             <div class="container">
@@ -25,13 +121,26 @@
                     <div class="brand header-brand">
                         <h1 class="m-0">
 							<a href="/">
-                                <img class="header-logo-image" src="static/dist/images/blueticklogo.png" alt="Logo" style="mix-blend-mode: screen; transform: scale(1.0);">
+                                <img class="header-logo-image" src="static/dist/images/blueticklogo.png" alt="Logo" style=" transform: scale(1.0);">
                             </a>
                             
                         </h1>
                     </div>
+<!-- Add a toggle switch to activate/deactivate light mode -->
+<label class="toggle-switch">
+    <input type="checkbox" id="toggle-light-mode">
+    <span class="switch">
+        <span class="icon moon">&#9790;</span>
+        <span class="icon sun">&#9728;</span>
+      
+      
+    </span>
+  </label>
+  
                 </div>
+                
             </div>
+            
         </header>
 
         <main>
@@ -39,7 +148,7 @@
                 <div class="container">
                     <div class="hero-inner">
 						<div class="hero-copy" >
-	                        <h1 class="hero-title mt-0">Analyze and Query over your PDF using BluetickPDF</h1>
+	                        <h1 class="hero-title mt-0" >Analyze and Query over your PDF using BluetickPDF</h1>
 	                        <p class="hero-paragraph">Discover hidden gems in PDFs with our powerful blend of natural language processing, machine learning and advanced search technologies, gaining profound insights into the written word. </p>
 	                        <div class="hero-cta"><a class="button button-primary" href="login.html">Get Started</a><a class="button" href="https://www.bluetickconsultants.com/">Get in touch</a></div>
 						</div>
@@ -64,7 +173,7 @@
 
             <section class="features section">
                 <div class="container" >
-                    <h2 style="text-align: center;">A quick guide to use BluetickPDF</h2>
+                    <h2 class="section-title mt-0" style="text-align: center;">A quick guide to use BluetickPDF</h2>
                     <div class="features-inner section-inner has-bottom-divider">
                         <div class="features-wrap d-flex justify-content-center">
                             <div class="feature text-center is-revealing">
@@ -173,31 +282,31 @@
             -->
         </main>
 
-        <footer class="site-footer">
+        <footer class="site-footer" >
             <div class="container">
                 <div class="site-footer-inner">
-                    <div class="brand footer-brand">
-						<a href="#">
+                    <div class="brand footer-brand" >
+						<a href="#" >
 							<img class="header-logo-image" src="static/dist/images/logo.svg" alt="Logo">
 						</a>
                     </div>
-                    <ul class="footer-links list-reset">
+                    <ul class="footer-links list-reset" >
                         <li>
-                            <a href="https://www.bluetickconsultants.com/contact-us.html">Contact</a>
+                            <a href="https://www.bluetickconsultants.com/contact-us.html" style="color:#0f8afd;">Contact</a>
                         </li>
                         <li>
-                            <a href="https://www.bluetickconsultants.com/about-us.html">About us</a>
+                            <a href="https://www.bluetickconsultants.com/about-us.html" style="color:#0f8afd;">About us</a>
                         </li>
                         <li>
-                            <a href="terms_of_services.html">Terms of Services</a>
+                            <a href="terms_of_services.html" style="color:#0f8afd;">Terms of Services</a>
                         </li>
                         <li>
-                            <a href="privacy_policy.html">Privacy Policy</a>
+                            <a href="privacy_policy.html" style="color:#0f8afd;">Privacy Policy</a>
                         </li>
                     </ul>
                     <ul class="footer-social-links list-reset">
                         <li>
-                            <a href="https://www.facebook.com/bluetickconsultants/" target="blank">
+                            <a href="https://www.facebook.com/bluetickconsultants/" target="blank" >
                                 <span class="screen-reader-text">Facebook</span>
                                 <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z" fill="#0270D7"/>
@@ -240,5 +349,10 @@
     </div>
 
     <script src="static/dist/js/main.min.js"></script>
+
+    <!-- Add this script after the styles -->
+    <script src="static/dist/js/darkmode.js"></script>
+
+    
 </body>
 </html>

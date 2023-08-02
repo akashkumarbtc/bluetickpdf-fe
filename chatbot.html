@@ -181,11 +181,20 @@
         </div>
         <div class="buttons">
             <div class="field">
+                <!--
                 <input type="checkbox" id="switch" />
                 <label for="switch"></label>
                 <span class="about">Web Access</span>
+                -->
+
+                
+                 
+                  
+                
             </div>
+            
             <div class="field">
+                
                 <select name="model" id="model">
                     <option value="text-gpt-0035-render-sha-0" selected>gpt-3.5-turbo</option>
                     <option value="text-gpt-0040-render-sha-0" disabled>gpt-4</option>
@@ -193,22 +202,30 @@
                     <option value="text-gpt-0004-render-sha-0314" disabled>gpt-4-0314</option>
                   </select>
             </div>
-            <div  class="field">
-                <a id="logoutButton" >
-
-                    <button  class="button">
-                        <i class="fa-regular fa-sign-out-alt"></i>
-                        Logout
-                    </button>
+            <div class="field">
+                <a id="logoutButton" class="button">
+                    <i class="fa-regular fa-sign-out-alt"></i>
+                    Logout
                 </a>
-
+                <!-- Add a toggle switch to activate/deactivate light mode -->
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggle-light-mode">
+                    <span class="switch">
+                        <span class="icon moon">&#9790;</span>
+                        <span class="icon sun">&#9728;</span>
+                    </span>
+                    
+                </label>
             </div>
+            
         </div>
     </div>
 </div>
 <div class="mobile-sidebar">
     <i class="fa-solid fa-bars"></i>
 </div>
+<!-- Add this script after the styles -->
+<script src="static/dist/js/darkmode.js"></script>
 <script>
   document.getElementById("logoutButton").addEventListener("click", function() {
     // Remove data from local storage

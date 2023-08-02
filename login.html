@@ -7,6 +7,7 @@
     <title>Login - BluetickPDF</title>
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" href="static/dist/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/static/dist/scrollreveal.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -145,6 +146,90 @@
             position: absolute;
             left: -9999px;
         }
+        /* Styles for the toggle switch */
+        .toggle-switch {
+          display: inline-block;
+          position: relative;
+          width: 48px;
+          height: 34px;
+          margin: -50px 280px;
+        }
+        
+        /* Hide the checkbox */
+        .toggle-switch input {
+          display: none;
+        }
+        
+        /* Styles for the switch track */
+        .toggle-switch .switch {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 48px;
+          height: 24px;
+          border-radius: 12px;
+          background-color: #242830; /* Default switch color */
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+        
+        /* Styles for the switch thumb */
+        .toggle-switch input:checked + .switch {
+          background-color: #097dea; /* Switch color in light mode */
+        }
+        
+        /* Styles for the thumb icon (optional) */
+        .toggle-switch .icon {
+          position: absolute;
+          top: -3px;
+          font-size: 18px;
+          color: #fff; /* Icon color */
+          transition: transform 0.3s ease;
+        }
+        
+        /* Moon and sun icons */
+        .toggle-switch .icon.moon {
+          left: 4px;
+        }
+        
+        .toggle-switch .icon.sun {
+          right: 4px;
+          transform: scale(0);
+        }
+        
+        /* Show sun icon in light mode */
+        .toggle-switch input:checked + .switch .icon.moon {
+          transform: scale(0);
+        }
+        
+        .toggle-switch input:checked + .switch .icon.sun {
+          transform: scale(1);
+        }
+        
+        /* Dark mode styles */
+        .dark-mode .toggle-switch .switch {
+          background-color: #0270d7 ;
+        }
+        
+        .dark-mode .toggle-switch input:checked + .switch {
+          background-color: #1b1d23;
+        }
+        
+        .dark-mode .toggle-switch .icon {
+          color: lightblue;
+        }
+        
+        .dark-mode .toggle-switch .icon.moon {
+          left: 4px;
+          transform: scale(1);
+        }
+        
+        .dark-mode .toggle-switch .icon.sun {
+          right: 4px;
+          transform: scale(0);
+        }
+        
+    
     </style>
 </head>
 <body class="is-boxed has-animations">
@@ -157,10 +242,19 @@
                         <h1 class="m-0">
                             <a href="/">
                                 <img class="header-logo-image" src="static/dist/images/blueticklogo.png" alt="Logo"
-                                     style="mix-blend-mode: screen; transform: scale(1.0)">
+                                     style=" transform: scale(1.0)">
                             </a>
                         </h1>
                     </div>
+                    <!-- Add a toggle switch to activate/deactivate light mode -->
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-light-mode">
+                        <span class="switch">
+                            <span class="icon sun">&#9728;</span>
+                          <span class="icon moon">&#9790;</span>
+                          
+                        </span>
+                      </label>
                 </div>
             </div>
         </header>
@@ -177,7 +271,7 @@
                             <form class="login-form-fields" method="POST" >
                                 <!-- <input id="csrf_token" name="csrf_token" type="hidden" value="ImI2ZmIwMzcyNzE4NTJiYjcwZmVhNjFlN2NjNWYyY2MwZDU3ZmZhNTQi.ZLpwww.Lh7yKobPeHaav-X8Kw2VBI_CQC4"> -->
                                 <div class="form-field">
-                                    <label for="username">Username:</label>
+                                    <label for="username">Email:</label>
                                     <input id="username" maxlength="100" minlength="4" name="username" placeholder="Email" required type="email" value="">
                                 </div>
                                 <div class="form-field">
@@ -199,31 +293,31 @@
           </main>
           
 
-        <footer class="site-footer">
+          <footer class="site-footer" >
             <div class="container">
                 <div class="site-footer-inner">
-                    <div class="brand footer-brand">
-						<a href="#">
+                    <div class="brand footer-brand" >
+						<a href="#" >
 							<img class="header-logo-image" src="static/dist/images/logo.svg" alt="Logo">
 						</a>
                     </div>
-                    <ul class="footer-links list-reset">
+                    <ul class="footer-links list-reset" >
                         <li>
-                            <a href="https://www.bluetickconsultants.com/contact-us.html">Contact</a>
+                            <a href="https://www.bluetickconsultants.com/contact-us.html" style="color:#0f8afd;">Contact</a>
                         </li>
                         <li>
-                            <a href="https://www.bluetickconsultants.com/about-us.html">About us</a>
+                            <a href="https://www.bluetickconsultants.com/about-us.html" style="color:#0f8afd;">About us</a>
                         </li>
                         <li>
-                            <a href="terms_of_services.html">Terms of Services</a>
+                            <a href="terms_of_services.html" style="color:#0f8afd;">Terms of Services</a>
                         </li>
                         <li>
-                            <a href="privacy_policy.html">Privacy Policy</a>
+                            <a href="privacy_policy.html" style="color:#0f8afd;">Privacy Policy</a>
                         </li>
                     </ul>
                     <ul class="footer-social-links list-reset">
                         <li>
-                            <a href="https://www.facebook.com/bluetickconsultants/" target="blank">
+                            <a href="https://www.facebook.com/bluetickconsultants/" target="blank" >
                                 <span class="screen-reader-text">Facebook</span>
                                 <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z" fill="#0270D7"/>
@@ -248,11 +342,17 @@
                                     </g>
                                 </svg>
                             </a>
-                            
-                            
-                            
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/officialbluetickconsultants/?hl=en" target="_blank">
+                                <span class="screen-reader-text">Instagram</span>
+                                <i class="fa-brands fa-instagram" style="font-size: 20px; color:#0270D7"></i>
+                            </a>
                         </li>
                     </ul>
+                    
+                    
+                    
                     <div class="footer-copyright"> 2023 © All rights reserved by Bluetick Consultants LLP</div>
                 </div>
             </div>
@@ -262,6 +362,7 @@
 
 <script src="static/dist/js/main.min.js"></script>
 <script src="static/dist/js/base_url.js"></script>
+<script src="static/dist/js/darkmode.js"></script>
 <script>
     // var baseURL = localStorage.getItem('baseURL');
 
