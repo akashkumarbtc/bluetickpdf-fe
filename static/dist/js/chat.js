@@ -106,7 +106,6 @@ const ask_gpt = async (message) => {
     await new Promise((r) => setTimeout(r, 1000));
     window.scrollTo(0, 0);
     // const csrfToken = document.querySelector('input[name="csrf_token"]').value;
-    console.log("im herererer eeeeeeeeeeee");
     const response = await fetch(base_url + `/ask`, {
       method: `POST`,
       signal: window.controller.signal,
@@ -119,6 +118,7 @@ const ask_gpt = async (message) => {
         conversation_id: window.conversation_id,
         action: `_ask`,
         model: model.options[model.selectedIndex].value,
+        user_id: localStorage.getItem("user_id"),
         // jailbreak: jailbreak.options[jailbreak.selectedIndex].value,
         meta: {
           id: window.token,

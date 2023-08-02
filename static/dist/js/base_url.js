@@ -1,4 +1,4 @@
-var base_url = 'https://coops-backend.bluetickconsultants.com'
+var base_url = 'http://127.0.0.1:5000'
 console.log(base_url)
 
 localStorage.setItem('baseURL', base_url);

@@ -203,7 +203,7 @@
                   </select>
             </div>
             <div class="field">
-                <a id="logoutButton" class="button">
+                <a id="logoutButton" class="button" onclick="logout()">
                     <i class="fa-regular fa-sign-out-alt"></i>
                     Logout
                 </a>
@@ -227,14 +227,32 @@
 <!-- Add this script after the styles -->
 <script src="static/dist/js/darkmode.js"></script>
 <script>
-  document.getElementById("logoutButton").addEventListener("click", function() {
-    // Remove data from local storage
-    localStorage.removeItem("token");
-    localStorage.removeItem("user_id");
+  function logout() {
 
-    // Redirect to the login page (replace "login.html" with your actual login page URL)
-    window.location.href = "index.html";
-});
+        // e.preventDefault()
+        const user_id = localStorage.getItem("user_id");
+
+        var data = {
+            user_id: user_id,
+        };
+        console.log(data)
+
+        fetch(base_url + '/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("user_id");
+                window.location.href = "index.html";
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    }
 </script>
 </body>
 </html>
