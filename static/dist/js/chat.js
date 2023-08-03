@@ -124,7 +124,7 @@ const ask_gpt = async (message) => {
           id: window.token,
           content: {
             conversation: await get_conversation(window.conversation_id),
-            internet_access: document.getElementById("switch").checked,
+            //internet_access: document.getElementById("switch").checked,
             content_type: "text",
             parts: [
               {

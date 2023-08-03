@@ -301,7 +301,7 @@ body:not(.dark-mode){
                             </div>
                         </div>
                         <div class="logout-and-toggle">
-                          <button id="logoutButton" class="logout-button">Logout</button>
+                          <button id="logoutButton" class="logout-button" onclick="logout()">Logout</button>
                           <!-- Add a toggle switch to activate/deactivate light mode -->
                           <label class="toggle-switch">
                               <input type="checkbox" id="toggle-light-mode">
@@ -336,7 +336,7 @@ body:not(.dark-mode){
                                         <img src="static\dist\images\upload.png" alt="Upload Icon" style="transform:scale(0.60)">
                                       </div>
                                       <div class="upload-text">
-                                        <span id="file-name">Drag and drop a PDF file or click here to browse</span>
+                                        <span id="file-name">Drag and drop a file or click here to browse</span>
                                       </div>
                                     </label>
                                     <input type="file" id="pdf-file" name="file" accept=".pdf" onchange="updateFileName(this)">
@@ -473,10 +473,22 @@ body:not(.dark-mode){
           const fileName = file ? file.name : ""; // Check if a file is selected
           const fileSize = file ? file.size : 0; // Check if a file is selected
           const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+          const fileTypeSelect = document.getElementById("file-type");
+          const selectedFileType = fileTypeSelect.options[fileTypeSelect.selectedIndex].value;
+
           var token = localStorage.getItem('token')
 
           if (!file) {
-            alert("Please upload a PDF file first.");
+            alert("Please upload a file first.");
+            return;
+          }
+          if (selectedFileType === "pdf" && !fileName.toLowerCase().endsWith(".pdf")) {
+            alert("Please select a PDF file.");
+            return;
+          }
+        
+          if (selectedFileType === "e-book" && !fileName.toLowerCase().endsWith(".epub")) {
+            alert("Please select an eBook (EPUB) file.");
             return;
           }
           if (fileSize > maxSize) {
@@ -545,8 +557,28 @@ body:not(.dark-mode){
           updateFileSize(fileInput);
         });
       });
+      // Function to update the file type and name
+function updateFileTypeAndName() {
+  const fileTypeSelect = document.getElementById("file-type");
+  const selectedFileType = fileTypeSelect.options[fileTypeSelect.selectedIndex].value;
 
-      $("#logout_link").click(function () {
+  const fileInput = document.getElementById("pdf-file");
+  if (selectedFileType === "pdf") {
+      fileInput.accept = ".pdf";
+  } else if (selectedFileType === "e-book") {
+      fileInput.accept = ".epub";
+  }
+}
+
+// Add event listener to the file type select element
+const fileTypeSelect = document.getElementById("file-type");
+fileTypeSelect.addEventListener("change", updateFileTypeAndName);
+
+// Call the function initially to set the default file type
+updateFileTypeAndName();
+
+
+      /*$("#logout_link").click(function () {
         localStorage.clear();
         location.href = "index.html";
     });
@@ -558,8 +590,38 @@ body:not(.dark-mode){
 
       // Redirect to the login page (replace "login.html" with your actual login page URL)
       window.location.href = "index.html";
+    } 
+    )*/
+    function logout() {
+      // Check if user_id is present in localStorage
+      const user_id = localStorage.getItem("user_id");
+  
+      if (user_id) {
+        var data = {
+          user_id: user_id,
+        };
+        console.log(data);
+  
+        fetch(base_url + '/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user_id");
+            window.location.href = "index.html";
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+      } else {
+        // Redirect to the login page 
+        window.location.href = "login.html";
+      }
     }
-    )
 
     </script>
 </body>

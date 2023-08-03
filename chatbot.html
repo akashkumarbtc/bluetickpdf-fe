@@ -227,32 +227,37 @@
 <!-- Add this script after the styles -->
 <script src="static/dist/js/darkmode.js"></script>
 <script>
-  function logout() {
-
-        // e.preventDefault()
-        const user_id = localStorage.getItem("user_id");
-
+    function logout() {
+      // Check if user_id is present in localStorage
+      const user_id = localStorage.getItem("user_id");
+  
+      if (user_id) {
         var data = {
-            user_id: user_id,
+          user_id: user_id,
         };
-        console.log(data)
-
+        console.log(data);
+  
         fetch(base_url + '/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                localStorage.removeItem("token");
-                localStorage.removeItem("user_id");
-                window.location.href = "index.html";
-            })
-            .catch(error => {
-                alert(error.message);
-            });
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user_id");
+            window.location.href = "index.html";
+        })
+        .catch(error => {
+            alert(error.message);
+        });
+      } else {
+        // Redirect to the login page 
+        window.location.href = "login.html";
+      }
     }
-</script>
+  </script>
+  
 </body>
 </html>
