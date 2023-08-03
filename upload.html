@@ -495,10 +495,14 @@ body:not(.dark-mode){
             alert("File size exceeds the maximum limit of 10MB.");
             return;
           }
+          const selectElement = document.getElementById("file-type");
+          const selectedValue = selectElement.value;
+
           const user_id = localStorage.getItem("user_id");
           const formData = new FormData();
           formData.append('file', file);
           formData.append('user_id', user_id);
+          formData.append('file_type', selectedValue);
 
           console.log(formData)
         // Set CSRF token in the request headers
