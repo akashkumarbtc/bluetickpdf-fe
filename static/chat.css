@@ -198,3 +198,10 @@
         width: 70%;
     }
 }
+
+@media (max-width: 768px) {
+    #send-button {
+        margin-left: 5px; /* Adjust the left margin as needed */
+        margin-bottom: 5px; /* Adjust the bottom margin as needed */
+    }
+}

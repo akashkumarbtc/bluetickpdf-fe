@@ -173,25 +173,27 @@
                 <form onsubmit="event.preventDefault(); sendMessage();">
                     <textarea id="message-input" name="question" placeholder="Ask a question" cols="30" rows="10" style="white-space: pre-wrap;"></textarea>
                     <div id="send-button" onclick="sendMessage()">
-                        <i class="fa-regular fa-paper-plane-top" style="margin-left:1170px"></i>
+                        <i class="fa-regular fa-paper-plane-top" style="margin-left:1170px;margin-bottom:55px;"></i>
                     </div>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 </form>
             </div>
         </div>
         <div class="buttons">
+            <!--
             <div class="field">
-                <!--
+                
                 <input type="checkbox" id="switch" />
                 <label for="switch"></label>
                 <span class="about">Web Access</span>
-                -->
+            
 
                 
                  
                   
                 
             </div>
+        -->
             
             <div class="field">
                 
@@ -207,16 +209,17 @@
                     <i class="fa-regular fa-sign-out-alt"></i>
                     Logout
                 </a>
-                <!-- Add a toggle switch to activate/deactivate light mode -->
-                <label class="toggle-switch">
-                    <input type="checkbox" id="toggle-light-mode">
-                    <span class="switch">
-                        <span class="icon moon">&#9790;</span>
-                        <span class="icon sun">&#9728;</span>
-                    </span>
-                    
-                </label>
+                
             </div>
+            <!-- Add a toggle switch to activate/deactivate light mode -->
+            <label class="toggle-switch">
+                <input type="checkbox" id="toggle-light-mode">
+                <span class="switch">
+                    <span class="icon moon">&#9790;</span>
+                    <span class="icon sun">&#9728;</span>
+                </span>
+                
+            </label>
             
         </div>
     </div>

@@ -142,6 +142,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top:50px;
         }
     
         .welcome-message {
@@ -277,6 +278,63 @@
 body:not(.dark-mode){
   color: #0270D7;
 }
+/* Custom styling for the dropdown menu */
+.custom-dropdown {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #0270D7; /* Background color for the dropdown */
+    color: #fff; /* Text color for the dropdown */
+    border: 1px solid #ffffff; /* Border color for the dropdown */
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 100px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+/* Dropdown icon */
+.custom-dropdown::after {
+    content: "\25BC"; /* Unicode down-pointing triangle */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #6c63ff; /* Dropdown icon color */
+    pointer-events: none;
+}
+
+.custom-dropdown option {
+    font-size: 14px;
+    background-color: #1b1d23; /* Background color for dropdown options */
+    color: #fff; /* Text color for dropdown options */
+}
+
+/* Hover effect for dropdown options */
+.custom-dropdown option:hover {
+    background-color: #242830;
+}
+
+/* Focus and active state */
+.custom-dropdown:focus, .custom-dropdown:active {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+}
+
+/* Dark mode styles */
+.dark-mode .custom-dropdown {
+    background-color: #1b1d23;
+    color: lightblue;
+    border-color: #333;
+}
+.dark-mode .custom-dropdown option {
+    background-color: #242830;
+    color: #fff;
+}
+
 
 
 
@@ -293,12 +351,14 @@ body:not(.dark-mode){
                         <div class="brand header-brand">
                             <h1 class="m-0">
                                 <a href="/">
-                                    <img class="header-logo-image" src="static/dist/images/blueticklogo.png" alt="Logo" style="mix-blend-mode: screen; transform: scale(1.0)">
+                                    <img class="header-logo-image" src="static/dist/images/blueticklogo.png" alt="Logo" style="transform: scale(1.0)">
                                 </a>
                             </h1>
+                            <!--
                             <div class="welcome-message">
                                 <span>Welcome</span>
                             </div>
+                            -->
                         </div>
                         <div class="logout-and-toggle">
                           <button id="logoutButton" class="logout-button" onclick="logout()">Logout</button>
@@ -321,13 +381,14 @@ body:not(.dark-mode){
                     <div class="container">
                         <div class="upload-inner">
                             <div class="upload-form">
-                                <h2 class="upload-title mt-0">Upload PDF</h2>
+                                <h2 class="upload-title mt-0">Upload File</h2>
                                 <form class="upload-file-info" id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
                                   <div class="form-field">
                                     <label for="file-type">File Type:</label>
-                                    <select id="file-type" name="fileType">
-                                      <option value="pdf">PDF</option>
+                                    <select id="file-type" name="fileType" class="custom-dropdown">
+                                      <option value="pdf">PDF<i class="fa fa-angle-down"></i></option>
                                       <option value="e-book">E-book</option>
+                                      
                                     </select>
                                   </div>
                                   <div class="form-field">
