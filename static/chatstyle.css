@@ -31,10 +31,7 @@
     --conversations: black;
 }
 
-:root:not(.dark-mode) {
-    /* Light mode styles */
-    /* You can leave this empty or specify additional light mode styles here */
-}
+
 
 .dark-mode {
     /* Dark mode colors */

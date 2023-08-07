@@ -565,6 +565,8 @@ body:not(.dark-mode){
           formData.append('user_id', user_id);
           formData.append('file_type', selectedValue);
 
+          
+
           console.log(formData)
         // Set CSRF token in the request headers
         // const csrfToken = document.querySelector('input[name="csrf_token"]').value;
@@ -657,36 +659,48 @@ updateFileTypeAndName();
       window.location.href = "index.html";
     } 
     )*/
+    
     function logout() {
-      // Check if user_id is present in localStorage
       const user_id = localStorage.getItem("user_id");
-  
+
       if (user_id) {
-        var data = {
-          user_id: user_id,
-        };
-        console.log(data);
-  
-        fetch(base_url + '/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            localStorage.removeItem("token");
-            localStorage.removeItem("user_id");
-            window.location.href = "index.html";
-        })
-        .catch(error => {
-            alert(error.message);
-        });
+          var data = {
+              user_id: user_id,
+          };
+
+          fetch(base_url + '/logout', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+          })
+          .then(response => {
+              localStorage.removeItem("token");
+              localStorage.removeItem("user_id");
+              window.location.href = "index.html";
+          })
+          .catch(error => {
+              alert(error.message);
+          });
       } else {
-        // Redirect to the login page 
-        window.location.href = "login.html";
+            // Redirect to the login page
+            const popupMessage = "Session expired. Please login again.";
+            localStorage.setItem("popupMessage", popupMessage);
+            window.location.href = "login.html";
       }
-    }
+  }
+
+// Function to continuously check user_id and log out if not present
+function checkUserAndLogout() {
+  const user_id = localStorage.getItem("user_id");
+  if (!user_id) {
+      logout();
+  }
+}
+
+// Call the checkUserAndLogout function every 1000 milliseconds (1 second)
+setInterval(checkUserAndLogout, 1000);
 
     </script>
 </body>

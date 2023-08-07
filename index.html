@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
-    <meta charset="utf-8">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BluetickPDF</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <title>BluetickPDF - Analyze and Query over your PDF and Ebooks</title>
+    <meta name="description" content="In today's digital age, the ability to efficiently extract knowledge from vast amounts of text has become increasingly valuable. The integration of Generative AI into the realm of PDF analysis and querying opens up exciting possibilities for automating knowledge extraction from textual content.">
+    <meta name="keywords" content="Bluetick Consultants, BluetickPDF, BluetickEbooks, PDF analysis, Ebook Analysis, PDF, E-books, ">
+    
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" href='static/dist/css/style.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -103,6 +107,110 @@
     .section-title:not(.dark-mode),.feature-title:not(.dark-mode){
         color: #0270d7 ;
     }
+    /* Add your styles for the contact form and modal overlay here */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+    
+    .modal-content {
+        background-color: #f9f9f9;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 80%;
+        max-width: 500px;
+        position: relative;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .close-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 20px;
+    }
+    
+    .close-btn:hover {
+        color: #555;
+    }
+    
+    label {
+        display: block;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    
+    input,
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    
+    button[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    
+    button[type="submit"]:focus {
+        outline: none;
+    }
+    /* Additional styles for dark mode */
+.dark-mode .modal-content {
+    background-color: #333;
+    border: 1px solid #555;
+    color: #fff;
+}
+
+.dark-mode .close-btn {
+    color: #aaa;
+}
+
+.dark-mode label {
+    color: #fff;
+}
+
+.dark-mode input,
+.dark-mode textarea {
+    background-color: #444;
+    border: 1px solid #555;
+    color: #fff;
+}
+
+.dark-mode button[type="submit"] {
+    background-color: #0270d7;
+}
+
+.dark-mode button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+    
+
 
     
 </style>
@@ -150,7 +258,26 @@
 						<div class="hero-copy" >
 	                        <h1 class="hero-title mt-0" >Analyze and Query over your PDF using BluetickPDF</h1>
 	                        <p class="hero-paragraph">Discover hidden gems in PDFs with our powerful blend of natural language processing, machine learning and advanced search technologies, gaining profound insights into the written word. </p>
-	                        <div class="hero-cta"><a class="button button-primary" href="login.html">Get Started</a><a class="button" href="https://www.bluetickconsultants.com/">Get in touch</a></div>
+	                        <div class="hero-cta"><a class="button button-primary" href="login.html">Get Started</a><a class="button" id="openFormBtn">Get in touch</a>
+                                <div id="contactForm" class="modal">
+                                    <div class="modal-content">
+                                        <span class="close-btn">&times;</span>
+                                        <h2>Contact Us</h2>
+                                        <form id="contactFormContent" action="https://getform.io/f/1226a7ee-5246-4c9d-9575-294f34e7a3c1" method="POST">
+                                            <label for="name">Name:</label>
+                                            <input type="text" id="name" name="name" required>
+                                            <label for="email">Email:</label>
+                                            <input type="email" id="email" name="email" required>
+                                            <label for="message">Message:</label>
+                                            <textarea id="message" name="message" rows="4" required></textarea>
+                                            <!-- add hidden Honeypot input to prevent spams -->
+                                            <input type="hidden" name="_gotcha" style="display:none !important">
+                                            <button type="submit">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                            </div>
 						</div>
 						<div class="hero-figure anime-element">
 							<svg class="placeholder" width="528" height="396" viewBox="0 0 528 396">
@@ -235,6 +362,13 @@
                                         </div>
 										<div class="pricing-table-features-title text-xs pt-24 pb-24">What you will get</div>
                                         <ul class="pricing-table-features list-reset text-xs" style="color:white;">
+                                            <li>
+                                                <span>
+                                                    <strong>Query:</strong> 1 PDF - Maximum 10MB
+                                                </span>
+                                            </li>
+                                            
+                                            
                                             <li>
                                                 <span>Enhanced Security</span>
                                             </li>
@@ -350,6 +484,69 @@
 
     <!-- Add this script after the styles -->
     <script src="static/dist/js/darkmode.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+    
+            // Modal handling
+            const contactFormModal = document.getElementById("contactForm");
+            const openContactFormBtn = document.getElementById("openFormBtn");
+            const closeContactFormBtn = document.querySelector(".close-btn");
+    
+            // Open the contact form modal
+            openContactFormBtn.addEventListener("click", () => {
+                contactFormModal.style.display = "block";
+            });
+    
+            // Close the contact form modal
+            closeContactFormBtn.addEventListener("click", () => {
+                contactFormModal.style.display = "none";
+            });
+    
+            // Close the modal if the user clicks outside the modal content
+            window.addEventListener("click", (event) => {
+                if (event.target === contactFormModal) {
+                    contactFormModal.style.display = "none";
+                }
+            });
+    
+            // Form submission
+            const contactForm = document.getElementById("contactFormContent");
+    
+            contactForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+    
+                // Add loading spinner or other UI changes if needed
+                // showLoadingSpinner();
+    
+                // Submit the form using Fetch API
+                const formData = new FormData(contactForm);
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: "POST",
+                        body: formData,
+                    });
+    
+                    // Handle response here (e.g., show success message or reset the form)
+                    if (response.ok) {
+                        // Show success message or perform other actions
+                        console.log("Form submitted successfully");
+                        // Hide the modal
+                        contactFormModal.style.display = "none";
+                    } else {
+                        console.error("Form submission failed");
+                        // Handle error (show error message, reset form, etc.)
+                    }
+                } catch (error) {
+                    console.error("An error occurred:", error);
+                    // Handle error (show error message, reset form, etc.)
+                } finally {
+                    // Hide loading spinner or revert UI changes
+                    // hideLoadingSpinner();
+                }
+            });
+        });
+    </script>
 
     
 </body>

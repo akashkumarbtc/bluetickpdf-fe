@@ -408,6 +408,13 @@
                 alert(error.message);
             });
         });
+        document.addEventListener("DOMContentLoaded", () => {
+            const popupMessage = localStorage.getItem("popupMessage");
+            if (popupMessage) {
+                alert(popupMessage);
+                localStorage.removeItem("popupMessage");
+            }
+        });
 </script>
 
 </body>
