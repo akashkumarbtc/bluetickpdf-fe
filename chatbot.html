@@ -20,9 +20,10 @@
     <script src="static/dist/js/base_url.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/markdown-it@13.0.1/dist/markdown-it.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/base16/dracula.min.css">
+    <script src="static/dist/js/base_url.js"></script>
     <script>
-        const user_image = `<img src="static/dist/images/user.png" alt="your avatar">`;
-        const gpt_image = `<img src="static/dist/images/gpt.png" alt="your avatar">`;
+        const user_image = `<img src="${frontend_url}/static/dist/images/user.png" alt="your avatar">`;
+        const gpt_image = `<img src="${frontend_url}/static/dist/images/gpt.png" alt="your avatar">`;
     </script>
     <style>
         .hljs {
@@ -79,7 +80,6 @@
     <script src="static/dist/js/highlight.min.js"></script>
     <script src="static/dist/js/base_url.js"></script>
     <script>
-        // var baseURL = localStorage.getItem('baseURL');
         window.conversation_id = `{{ chat_id }}`;
         const messagesElement = document.getElementById("messages");
         const messageInput = document.getElementById("message-input");
@@ -172,8 +172,8 @@
             <div class="box input-box">
                 <form onsubmit="event.preventDefault(); sendMessage();">
                     <textarea id="message-input" name="question" placeholder="Ask a question" cols="30" rows="10" style="white-space: pre-wrap;"></textarea>
-                    <div id="send-button" onclick="sendMessage()">
-                        <i class="fa-regular fa-paper-plane-top" style="margin-left:1170px;margin-bottom:55px;"></i>
+                    <div id="send-button" >
+                        <i onclick="sendMessage()" class="fa-regular fa-paper-plane-top" style="margin-left:1170px;margin-bottom:55px;"></i>
                     </div>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 </form>
@@ -231,7 +231,7 @@
 <script src="static/dist/js/darkmode.js"></script>
 <script>
     
-      function logout() {
+    function logout() {
         const user_id = localStorage.getItem("user_id");
   
         if (user_id) {
@@ -249,6 +249,7 @@
             .then(response => {
                 localStorage.removeItem("token");
                 localStorage.removeItem("user_id");
+                localStorage.clear();
                 window.location.href = "login.html";
             })
             .catch(error => {

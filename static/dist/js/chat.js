@@ -105,6 +105,12 @@ const ask_gpt = async (message) => {
     window.scrollTo(0, 0);
     await new Promise((r) => setTimeout(r, 1000));
     window.scrollTo(0, 0);
+    user_id = localStorage.getItem("user_id")
+
+    if(!user_id) {
+      console.log("No user id.. Logging out !!")
+      logout()
+    }
     // const csrfToken = document.querySelector('input[name="csrf_token"]').value;
     const response = await fetch(base_url + `/ask`, {
       method: `POST`,
@@ -270,7 +276,7 @@ const delete_conversation = async (conversation_id) => {
 };
 
 const set_conversation = async (conversation_id) => {
-  history.pushState({}, null, `/chatbot.html/${conversation_id}`);
+  // history.pushState({}, null, `/chatbot.html/${conversation_id}`);
   window.conversation_id = conversation_id;
 
   await clear_conversation();
@@ -427,7 +433,11 @@ window.onload = async () => {
     }
   }
 
-  if (conversations == 0) localStorage.clear();
+  if (conversations == 0) 
+  {
+    console.log("here")
+  }
+  // localStorage.clear();
 
   await setTimeout(() => {
     load_conversations(20, 0);
@@ -470,3 +480,46 @@ document.querySelector(".mobile-sidebar").addEventListener("click", (event) => {
 
   window.scrollTo(0, 0);
 });
+
+function logout() {
+  const user_id = localStorage.getItem("user_id");
+
+  if (user_id) {
+      var data = {
+          user_id: user_id,
+      };
+
+      fetch(base_url + '/logout', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+      })
+      .then(response => {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user_id");
+          localStorage.clear();
+          window.location.href = "login.html";
+      })
+      .catch(error => {
+          alert(error.message);
+      });
+  } else {
+      // Redirect to the login page
+      const popupMessage = "Session expired. Please login again.";
+      localStorage.setItem("popupMessage", popupMessage);
+      window.location.href = "login.html";
+  }
+}
+
+// Function to continuously check user_id and log out if not present
+function checkUserAndLogout() {
+  const user_id = localStorage.getItem("user_id");
+  if (!user_id) {
+    logout();
+  }
+}
+
+// Call the checkUserAndLogout function every 1000 milliseconds (1 second)
+setInterval(checkUserAndLogout, 1000);
