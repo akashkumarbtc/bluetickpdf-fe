@@ -179,6 +179,13 @@
     cursor: pointer;
 }
 
+@media (max-width: 768px) {
+    #send-button {
+        margin-left: 5px; /* Adjust the left margin as needed */
+        margin-bottom: 5px; /* Adjust the bottom margin as needed */
+    }
+}
+
 /* Media Query for Mobile Devices */
 @media (max-width: 600px) {
     .chatbox__support {
@@ -199,9 +206,4 @@
     }
 }
 
-@media (max-width: 768px) {
-    #send-button {
-        margin-left: 5px; /* Adjust the left margin as needed */
-        margin-bottom: 5px; /* Adjust the bottom margin as needed */
-    }
-}
+

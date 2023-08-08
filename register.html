@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register - BluetickPDF</title>
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="static/dist/css/style.css">
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/static/dist/scrollreveal.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        .logo { float: left; }
+        .switchwrap { float: right; }
+        main { width: 100%; float: left; }
+        a { display: block; }
         a,
         button {
             cursor: pointer;
@@ -31,18 +38,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            /* height: 100vh; */
         }
 
         .register-form {
             max-width: 400px;
             width: 100%;
-            margin-bottom: 200px;
+            margin-bottom: 0px;
             padding: 20px;
             background-color: black;
             border-radius: 14px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: white; /* Added */
+            color: white;
+            /* Added */
         }
 
         .login-title {
@@ -64,10 +72,11 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
-            color: black; /* Added */
+            color: black;
+            /* Added */
         }
 
-        input[type="submit"]{
+        input[type="submit"] {
             display: block;
             width: 100%;
             padding: 10px;
@@ -126,166 +135,169 @@
             position: absolute;
             left: -9999px;
         }
-        /* Styles for the toggle switch */
-    .toggle-switch {
-      display: inline-block;
-      position: relative;
-      width: 48px;
-      height: 34px;
-      margin: -50px 280px;
-    }
-    
-    /* Hide the checkbox */
-    .toggle-switch input {
-      display: none;
-    }
-    
-    /* Styles for the switch track */
-    .toggle-switch .switch {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 48px;
-      height: 24px;
-      border-radius: 12px;
-      background-color: #242830; /* Default switch color */
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    
-    /* Styles for the switch thumb */
-    .toggle-switch input:checked + .switch {
-      background-color: #097dea; /* Switch color in light mode */
-    }
-    
-    /* Styles for the thumb icon (optional) */
-    .toggle-switch .icon {
-      position: absolute;
-      top: -3px;
-      font-size: 18px;
-      color: #fff; /* Icon color */
-      transition: transform 0.3s ease;
-    }
-    
-    /* Moon and sun icons */
-    .toggle-switch .icon.moon {
-      left: 4px;
-    }
-    
-    .toggle-switch .icon.sun {
-      right: 4px;
-      transform: scale(0);
-    }
-    
-    /* Show sun icon in light mode */
-    .toggle-switch input:checked + .switch .icon.moon {
-      transform: scale(0);
-    }
-    
-    .toggle-switch input:checked + .switch .icon.sun {
-      transform: scale(1);
-    }
-    
-    /* Dark mode styles */
-    .dark-mode .toggle-switch .switch {
-      background-color: #0270d7 ;
-    }
-    
-    .dark-mode .toggle-switch input:checked + .switch {
-      background-color: #1b1d23;
-    }
-    
-    .dark-mode .toggle-switch .icon {
-      color: lightblue;
-    }
-    
-    .dark-mode .toggle-switch .icon.moon {
-      left: 4px;
-      transform: scale(1);
-    }
-    
-    .dark-mode .toggle-switch .icon.sun {
-      right: 4px;
-      transform: scale(0);
-    }
-        
-    </style>
-</head>
-<body class="is-boxed has-animations">
-<div class="body-wrap">
-    <div class="card">
-        <header class="site-header">
-            <div class="container">
-                <div class="site-header-inner">
-                    <div class="brand header-brand">
-                        <h1 class="m-0">
-                            <a href="/">
-                                <img class="header-logo-image" src="static/dist/images/blueticklogo.png" alt="Logo"
-                                     style=" transform: scale(1.0)">
-                            </a>
-                        </h1>
-                    </div>
-                                        <!-- Add a toggle switch to activate/deactivate light mode -->
-<label class="toggle-switch">
-    <input type="checkbox" id="toggle-light-mode">
-    <span class="switch">
-        <span class="icon sun">&#9728;</span>
-      <span class="icon moon">&#9790;</span>
-      
-    </span>
-  </label>
-                </div>
-            </div>
-        </header>
 
-        <main>
-            <section class="login-section">
+        /* Styles for the toggle switch */
+        .toggle-switch {
+          display: inline-block;
+            position: relative;
+            width: 48px;
+            height: 26px;
+            margin: 20px 280px;
+        }
+
+        /* Hide the checkbox */
+        .toggle-switch input {
+            display: none;
+        }
+
+        /* Styles for the switch track */
+        .toggle-switch .switch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 48px;
+            height: 24px;
+            border-radius: 12px;
+            background-color: #242830;
+            /* Default switch color */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Styles for the switch thumb */
+        .toggle-switch input:checked+.switch {
+            background-color: #097dea;
+            /* Switch color in light mode */
+        }
+
+        /* Styles for the thumb icon (optional) */
+        .toggle-switch .icon {
+            position: absolute;
+            top: -3px;
+            font-size: 18px;
+            color: #fff;
+            /* Icon color */
+            transition: transform 0.3s ease;
+        }
+
+        /* Moon and sun icons */
+        .toggle-switch .icon.moon {
+            left: 4px;
+        }
+
+        .toggle-switch .icon.sun {
+            right: 4px;
+            transform: scale(0);
+        }
+
+        /* Show sun icon in light mode */
+        .toggle-switch input:checked+.switch .icon.moon {
+            transform: scale(0);
+        }
+
+        .toggle-switch input:checked+.switch .icon.sun {
+            transform: scale(1);
+        }
+
+        /* Dark mode styles */
+        .dark-mode .toggle-switch .switch {
+            background-color: #0270d7;
+        }
+
+        .dark-mode .toggle-switch input:checked+.switch {
+            background-color: #1b1d23;
+        }
+
+        .dark-mode .toggle-switch .icon {
+            color: lightblue;
+        }
+
+        .dark-mode .toggle-switch .icon.moon {
+            left: 4px;
+            transform: scale(1);
+        }
+
+        .dark-mode .toggle-switch .icon.sun {
+            right: 4px;
+            transform: scale(0);
+        }
+    </style>
+    <link rel="stylesheet" href='static/custom.css'>
+</head>
+
+<body class="is-boxed has-animations">
+    <div class="body-wrap">
+        <div class="card">
+            <header class="site-header">
                 <div class="container">
-                    <div class="login-inner">
-                        <div class="register-form">
-                            <h2 class="login-title mt-0">Register</h2>
-                            <!-- {% if user_exist %}
+                    <div class="logo">
+                        <a href="/"><img src="static/dist/images/blueticklogo.png" alt="Logo"></a>
+                    </div>
+                    <!-- Add a toggle switch to activate/deactivate light mode -->
+                    <div class="switchwrap">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-light-mode">
+                            <span class="switch">
+                                <span class="icon moon">&#9790;</span>
+                                <span class="icon sun">&#9728;</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <section class="login-section">
+                    <div class="container">
+                        <div class="login-inner">
+                            <div class="register-form">
+                                <h2 class="login-title mt-0">Register</h2>
+                                <!-- {% if user_exist %}
                             <p style="color:red">The username is already taken</p>
                             {% endif %} -->
-                            <form class="register-form-fields" method="POST">
-                                <!-- <input id="csrf_token" name="csrf_token" type="hidden" value="IjZkMWYyODJiNWJkZGE1MjIzZjBiY2MzOGEzN2IxMmI3ZjhhNDkxNmYi.ZLpyaw.CJfysviDDPs0bvSEFMwtufs_99c"> -->
-                                <div class="form-field">
-                                    <label for="username">Email:</label>
-                                    <input id="username" maxlength="100" minlength="4" name="username" placeholder="Username" required type="text" value="">
-                                </div>
-                                <div class="form-field">
-                                    <label for="password">Password:</label>
-                                    <input id="password" maxlength="20" minlength="8" name="password" placeholder="Password" required type="password" value="">
-                                </div>
-                                <div class="form-field">
-                                    <input id="submit" name="   " type="submit" value="Register">
-                                </div>
-                                <div class="form-field">
-                                    <a href="login.html">Already Have an Account?</a>
-                                </div>
-                            </form>
+                                <form class="register-form-fields" method="POST">
+                                    <!-- <input id="csrf_token" name="csrf_token" type="hidden" value="IjZkMWYyODJiNWJkZGE1MjIzZjBiY2MzOGEzN2IxMmI3ZjhhNDkxNmYi.ZLpyaw.CJfysviDDPs0bvSEFMwtufs_99c"> -->
+                                    <div class="form-field">
+                                        <label for="username">Email:</label>
+                                        <input id="username" maxlength="100" minlength="4" name="username"
+                                            placeholder="Username" required type="text" value="">
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="password">Password:</label>
+                                        <input id="password" maxlength="20" minlength="8" name="password"
+                                            placeholder="Password" required type="password" value="">
+                                    </div>
+                                    <div class="form-field">
+                                        <input id="submit" name="   " type="submit" value="Register">
+                                    </div>
+                                    <div class="form-field">
+                                        <a href="login.html">Already Have an Account?</a>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-              </div>
-            </section>
-          </main>
-          
+        </div>
+        </section>
+        </main>
 
-          <footer class="site-footer" >
+
+        <footer class="site-footer">
             <div class="container">
                 <div class="site-footer-inner">
-                    <div class="brand footer-brand" >
-						<a href="#" >
-							<img class="header-logo-image" src="static/dist/images/logo.svg" alt="Logo">
-						</a>
+                    <div class="brand footer-brand">
+                        <a href="#">
+                            <img class="header-logo-image" src="static/dist/images/logo.svg" alt="Logo">
+                        </a>
                     </div>
-                    <ul class="footer-links list-reset" >
+                    <ul class="footer-links list-reset">
                         <li>
-                            <a href="https://www.bluetickconsultants.com/contact-us.html" style="color:#0f8afd;">Contact</a>
+                            <a href="https://www.bluetickconsultants.com/contact-us.html"
+                                style="color:#0f8afd;">Contact</a>
                         </li>
                         <li>
-                            <a href="https://www.bluetickconsultants.com/about-us.html" style="color:#0f8afd;">About us</a>
+                            <a href="https://www.bluetickconsultants.com/about-us.html" style="color:#0f8afd;">About
+                                us</a>
                         </li>
                         <li>
                             <a href="terms_of_services.html" style="color:#0f8afd;">Terms of Services</a>
@@ -296,10 +308,12 @@
                     </ul>
                     <ul class="footer-social-links list-reset">
                         <li>
-                            <a href="https://www.facebook.com/bluetickconsultants/" target="blank" >
+                            <a href="https://www.facebook.com/bluetickconsultants/" target="blank">
                                 <span class="screen-reader-text">Facebook</span>
                                 <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z" fill="#0270D7"/>
+                                    <path
+                                        d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z"
+                                        fill="#0270D7" />
                                 </svg>
                             </a>
                         </li>
@@ -307,17 +321,22 @@
                             <a href="https://twitter.com/BluetickConsult" target="blank">
                                 <span class="screen-reader-text">Twitter</span>
                                 <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z" fill="#0270D7"/>
+                                    <path
+                                        d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z"
+                                        fill="#0270D7" />
                                 </svg>
                             </a>
                         </li>
                         <li>
                             <a href="https://www.linkedin.com/company/bluetick-consultants/" target="_blank">
                                 <span class="screen-reader-text">LinkedIn</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 72 72" id="linkedin">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 72 72"
+                                    id="linkedin">
                                     <g fill="none" fill-rule="evenodd">
                                         <rect width="72" height="72" fill="#117EB8" rx="4"></rect>
-                                        <path fill="#FFF" d="M13.139 27.848h9.623V58.81h-9.623V27.848zm4.813-15.391c3.077 0 5.577 2.5 5.577 5.577 0 3.08-2.5 5.581-5.577 5.581a5.58 5.58 0 1 1 0-11.158zm10.846 15.39h9.23v4.231h.128c1.285-2.434 4.424-5 9.105-5 9.744 0 11.544 6.413 11.544 14.75V58.81h-9.617V43.753c0-3.59-.066-8.209-5-8.209-5.007 0-5.776 3.911-5.776 7.95V58.81h-9.615V27.848z"></path>
+                                        <path fill="#FFF"
+                                            d="M13.139 27.848h9.623V58.81h-9.623V27.848zm4.813-15.391c3.077 0 5.577 2.5 5.577 5.577 0 3.08-2.5 5.581-5.577 5.581a5.58 5.58 0 1 1 0-11.158zm10.846 15.39h9.23v4.231h.128c1.285-2.434 4.424-5 9.105-5 9.744 0 11.544 6.413 11.544 14.75V58.81h-9.617V43.753c0-3.59-.066-8.209-5-8.209-5.007 0-5.776 3.911-5.776 7.95V58.81h-9.615V27.848z">
+                                        </path>
                                     </g>
                                 </svg>
                             </a>
@@ -329,25 +348,25 @@
                             </a>
                         </li>
                     </ul>
-                    
-                    
-                    
+
+
+
                     <div class="footer-copyright"> 2023 © All rights reserved by Bluetick Consultants LLP</div>
                 </div>
             </div>
         </footer>
     </div>
-</div>
+    </div>
 
-<script src="static/dist/js/main.min.js"></script>
-<script src="static/dist/js/base_url.js"></script>
-<script src="static/dist/js/darkmode.js"></script>
-<script>
+    <script src="static/dist/js/main.min.js"></script>
+    <script src="static/dist/js/base_url.js"></script>
+    <script src="static/dist/js/darkmode.js"></script>
+    <script>
 
-    // var baseURL = localStorage.getItem('baseURL');
+        // var baseURL = localStorage.getItem('baseURL');
 
-    
-    $('.register-form-fields').submit(function (e) {
+
+        $('.register-form-fields').submit(function (e) {
             e.preventDefault()
             var usernameInput = document.querySelector('#username');
             var passwordInput = document.querySelector('#password');
@@ -361,12 +380,12 @@
             console.log(data)
 
             fetch(base_url + '/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Register failed. Please try again!.');
@@ -374,17 +393,18 @@
                     return response.json();
                 })
                 .then(data => {
-                    
-                    
+
+
                     // Redirect to login.html
                     window.location.href = "login.html";
                 })
                 .catch(error => {
                     alert(error.message);
                 });
-            });
+        });
 
-</script>
+    </script>
 
 </body>
+
 </html>

@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PDF Upload - BluetickPDF</title>
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="static/dist/css/style.css">
     <style>
+        .logo { float: left; }
+        .switchwrap { float: right; }
+        main { width: 100%; float: left; }
+        a { display: block; }
         a,
         button {
             cursor: pointer;
@@ -18,7 +25,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            /* height: 100vh; */
             position: relative;
             z-index: 1;
         }
@@ -28,69 +35,73 @@
             z-index: 2;
         }
 
-        .upload-form {
+        /* .upload-form {
             margin-top: 20px;
-        }
+        } */
 
         .upload-form input[type="file"] {
             display: none;
         }
 
         .upload-button {
-          display: inline-block;
-          padding: 10px 20px;
-          background-color: #0270D7;
-          color: #ffffff;
-          border: none;
-          border-radius: 4px;
-          font-size: 16px;
-          font-weight: bold;
-          cursor: pointer;
-          margin-top:10px;
-          transition: background-color 0.3s ease;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0270D7;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
         }
-        
+
         .upload-button:hover {
-          background-color: #025aa6;
+            background-color: #025aa6;
         }
-        
+
 
         .upload-file-info {
             margin-top: 10px;
         }
+
         .upload-label {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          border: 2px dashed #999;
-          border-radius: 8px;
-          padding: 20px;
-          cursor: pointer;
-          transition: border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #999;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
         }
-        
+
         .upload-label:hover {
-          border-color: #333;
+            border-color: #333;
         }
-        
+
         .upload-icon {
-          margin-bottom: 10px;
+            margin-bottom: 10px;
         }
-        
+
         .upload-text {
-          text-align: center;
+            text-align: center;
         }
-        
-        
-        
+
+
+
         .upload-text span {
             display: block;
-            font-size: 18px; /* Adjust the font size as needed */
-            color: #0270D7; /* Set the same color as the buttons */
+            font-size: 18px;
+            /* Adjust the font size as needed */
+            color: #0270D7;
+            /* Set the same color as the buttons */
         }
-        .card{
-          width:100%;
+
+        .card {
+            width: 100%;
         }
 
         /* Added CSS for the overlay */
@@ -101,7 +112,8 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            z-index: 999; /* Set a higher z-index to ensure it covers everything */
+            z-index: 999;
+            /* Set a higher z-index to ensure it covers everything */
             display: none;
         }
 
@@ -116,7 +128,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 1000; /* Set a higher z-index to appear above the overlay */
+            z-index: 1000;
+            /* Set a higher z-index to appear above the overlay */
             display: none;
         }
 
@@ -138,240 +151,243 @@
         .loading-spinner.active {
             display: block;
         }
+
         .site-header-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top:50px;
+            margin-top: 50px;
         }
-    
+
         .welcome-message {
             margin-right: 20px;
         }
-    
+
         .welcome-message span {
             color: #fff;
         }
+
         /* Existing CSS code omitted for brevity */
 
-.logout-button-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-right: 20px;
-}
+        .logout-button-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-right: 20px;
+        }
+
+        .logout-and-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-right: 20px;
+        }
+
+        .logout-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0270D7;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-right: 10px;
+            /* Add a margin between the logout button and the toggle switch */
+        }
+
+        .logout-button:hover {
+            background-color: #025aa6;
+        }
+
+        .form-field {
+            margin-bottom: 10px;
+        }
 
 
+        /* Styles for the toggle switch */
+        .toggle-switch {
+            display: inline-block;
+            position: relative;
+            width: 48px;
+            height: 26px;
+        }
 
+        /* Hide the checkbox */
+        .toggle-switch input {
+            display: none;
+        }
 
+        /* Styles for the switch track */
+        .toggle-switch .switch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 48px;
+            height: 24px;
+            border-radius: 12px;
+            background-color: #242830;
+            /* Default switch color */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.logout-and-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-right: 20px;
-}
+        /* Styles for the switch thumb */
+        .toggle-switch input:checked+.switch {
+            background-color: #097dea;
+            /* Switch color in light mode */
+        }
 
-.logout-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #0270D7;
-  color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-right: 10px; /* Add a margin between the logout button and the toggle switch */
-}
+        /* Styles for the thumb icon (optional) */
+        .toggle-switch .icon {
+            position: absolute;
+            top: -3px;
+            font-size: 18px;
+            color: #fff;
+            /* Icon color */
+            transition: transform 0.3s ease;
+        }
 
-.logout-button:hover {
-  background-color: #025aa6;
-}
-.form-field {
-  margin-bottom: 10px;
-}
+        /* Moon and sun icons */
+        .toggle-switch .icon.moon {
+            left: 4px;
+        }
 
+        .toggle-switch .icon.sun {
+            right: 4px;
+            transform: scale(0);
+        }
 
-/* Styles for the toggle switch */
-.toggle-switch {
-  display: inline-block;
-  position: relative;
-  width: 48px;
-  height: 34px;
-}
+        /* Show sun icon in light mode */
+        .toggle-switch input:checked+.switch .icon.moon {
+            transform: scale(0);
+        }
 
-/* Hide the checkbox */
-.toggle-switch input {
-  display: none;
-}
+        .toggle-switch input:checked+.switch .icon.sun {
+            transform: scale(1);
+        }
 
-/* Styles for the switch track */
-.toggle-switch .switch {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 48px;
-  height: 24px;
-  border-radius: 12px;
-  background-color: #242830; /* Default switch color */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+        /* Dark mode styles */
+        .dark-mode .toggle-switch .switch {
+            background-color: #0270d7;
+        }
 
-/* Styles for the switch thumb */
-.toggle-switch input:checked + .switch {
-  background-color: #097dea; /* Switch color in light mode */
-}
+        .dark-mode .toggle-switch input:checked+.switch {
+            background-color: #1b1d23;
+        }
 
-/* Styles for the thumb icon (optional) */
-.toggle-switch .icon {
-  position: absolute;
-  top: -3px;
-  font-size: 18px;
-  color: #fff; /* Icon color */
-  transition: transform 0.3s ease;
-}
+        .dark-mode .toggle-switch .icon {
+            color: lightblue;
+        }
 
-/* Moon and sun icons */
-.toggle-switch .icon.moon {
-  left: 4px;
-}
+        .dark-mode .toggle-switch .icon.moon {
+            left: 4px;
+            transform: scale(1);
+        }
 
-.toggle-switch .icon.sun {
-  right: 4px;
-  transform: scale(0);
-}
+        .dark-mode .toggle-switch .icon.sun {
+            right: 4px;
+            transform: scale(0);
+        }
 
-/* Show sun icon in light mode */
-.toggle-switch input:checked + .switch .icon.moon {
-  transform: scale(0);
-}
+        body:not(.dark-mode) {
+            color: #0270D7;
+        }
 
-.toggle-switch input:checked + .switch .icon.sun {
-  transform: scale(1);
-}
+        /* Custom styling for the dropdown menu */
+        .custom-dropdown {
+            /* appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none; */
+            background-color: #0270D7;
+            /* Background color for the dropdown */
+            color: #fff;
+            /* Text color for the dropdown */
+            border: 1px solid #ffffff;
+            /* Border color for the dropdown */
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 100%;
+            max-width: 100px;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+        }
 
-/* Dark mode styles */
-    .dark-mode .toggle-switch .switch {
-      background-color: #0270d7 ;
-    }
-    
-    .dark-mode .toggle-switch input:checked + .switch {
-      background-color: #1b1d23;
-    }
-    
-    .dark-mode .toggle-switch .icon {
-      color: lightblue;
-    }
+        /* Dropdown icon */
+        .custom-dropdown::after {
+            content: "\25BC";
+            /* Unicode down-pointing triangle */
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: #6c63ff;
+            /* Dropdown icon color */
+            pointer-events: none;
+        }
 
-.dark-mode .toggle-switch .icon.moon {
-  left: 4px;
-  transform: scale(1);
-}
+        .custom-dropdown option {
+            font-size: 14px;
+            background-color: #1b1d23;
+            /* Background color for dropdown options */
+            color: #fff;
+            /* Text color for dropdown options */
+        }
 
-.dark-mode .toggle-switch .icon.sun {
-  right: 4px;
-  transform: scale(0);
-}
-body:not(.dark-mode){
-  color: #0270D7;
-}
-/* Custom styling for the dropdown menu */
-.custom-dropdown {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-color: #0270D7; /* Background color for the dropdown */
-    color: #fff; /* Text color for the dropdown */
-    border: 1px solid #ffffff; /* Border color for the dropdown */
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    width: 100%;
-    max-width: 100px;
-    cursor: pointer;
-    outline: none;
-    position: relative;
-}
-/* Dropdown icon */
-.custom-dropdown::after {
-    content: "\25BC"; /* Unicode down-pointing triangle */
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    font-size: 12px;
-    color: #6c63ff; /* Dropdown icon color */
-    pointer-events: none;
-}
+        /* Hover effect for dropdown options */
+        .custom-dropdown option:hover {
+            background-color: #242830;
+        }
 
-.custom-dropdown option {
-    font-size: 14px;
-    background-color: #1b1d23; /* Background color for dropdown options */
-    color: #fff; /* Text color for dropdown options */
-}
+        /* Focus and active state */
+        .custom-dropdown:focus,
+        .custom-dropdown:active {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+        }
 
-/* Hover effect for dropdown options */
-.custom-dropdown option:hover {
-    background-color: #242830;
-}
+        /* Dark mode styles */
+        .dark-mode .custom-dropdown {
+            background-color: #1b1d23;
+            color: lightblue;
+            border-color: #333;
+        }
 
-/* Focus and active state */
-.custom-dropdown:focus, .custom-dropdown:active {
-    border-color: #6c63ff;
-    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
-}
-
-/* Dark mode styles */
-.dark-mode .custom-dropdown {
-    background-color: #1b1d23;
-    color: lightblue;
-    border-color: #333;
-}
-.dark-mode .custom-dropdown option {
-    background-color: #242830;
-    color: #fff;
-}
-
-
-
-
-
-          
+        .dark-mode .custom-dropdown option {
+            background-color: #242830;
+            color: #fff;
+        }
     </style>
 </head>
+
 <body class="is-boxed has-animations">
     <div class="body-wrap">
         <div class="card">
             <header class="site-header">
                 <div class="container">
-                    <div class="site-header-inner">
-                        <div class="brand header-brand">
-                            <h1 class="m-0">
-                                <a href="/">
-                                    <img class="header-logo-image" src="static/dist/images/blueticklogo.png" alt="Logo" style="transform: scale(1.0)">
-                                </a>
-                            </h1>
-                            <!--
-                            <div class="welcome-message">
-                                <span>Welcome</span>
-                            </div>
-                            -->
+                    <div class="logo">
+                        <a href="/"><img src="static/dist/images/blueticklogo.png" alt="Logo"></a>
+                    </div>
+                    <!--
+                        <div class="welcome-message">
+                            <span>Welcome</span>
                         </div>
-                        <div class="logout-and-toggle">
-                          <button id="logoutButton" class="logout-button" onclick="logout()">Logout</button>
-                          <!-- Add a toggle switch to activate/deactivate light mode -->
-                          <label class="toggle-switch">
-                              <input type="checkbox" id="toggle-light-mode">
-                              <span class="switch">
-                                  <span class="icon sun">&#9728;</span>
-                                  <span class="icon moon">&#9790;</span>
-                              </span>
-                          </label>
-                      </div>
-                      
+                        -->
+                    <div class="logout-and-toggle">
+                        <button id="logoutButton" class="logout-button" onclick="logout()">Logout</button>
+                        <!-- Add a toggle switch to activate/deactivate light mode -->
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-light-mode">
+                            <span class="switch">
+                                <span class="icon sun">&#9728;</span>
+                                <span class="icon moon">&#9790;</span>
+                            </span>
+                        </label>
                     </div>
                 </div>
             </header>
@@ -382,327 +398,340 @@ body:not(.dark-mode){
                         <div class="upload-inner">
                             <div class="upload-form">
                                 <h2 class="upload-title mt-0">Upload File</h2>
-                                <form class="upload-file-info" id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
-                                  <div class="form-field">
-                                    <label for="file-type">File Type:</label>
-                                    <select id="file-type" name="fileType" class="custom-dropdown">
-                                      <option value="pdf">PDF<i class="fa fa-angle-down"></i></option>
-                                      <option value="e-book">E-book</option>
-                                      
-                                    </select>
-                                  </div>
-                                  <div class="form-field">
-                                    <label for="pdf-file" class="upload-label">
-                                      <div class="upload-icon">
-                                        <img src="static\dist\images\upload.png" alt="Upload Icon" style="transform:scale(0.60)">
-                                      </div>
-                                      <div class="upload-text">
-                                        <span id="file-name">Drag and drop a file or click here to browse</span>
-                                      </div>
-                                    </label>
-                                    <input type="file" id="pdf-file" name="file" accept=".pdf" onchange="updateFileName(this)">
-                                  </div>
-                                  
-                              
-                                  <div class="form-field">
-                                    <input type="submit" value="Upload" class="upload-button">
-                                    <p id="file-size-limit" style="color: red; margin-top: 5px;"></p>
-                                    
-                                  </div>
-                                
-                                  <div class="loading-spinner" id="loadingSpinner">
-                                    <div class="spinner"></div>
-                                  </div>
+                                <form class="upload-file-info" id="uploadForm" action="/upload" method="POST"
+                                    enctype="multipart/form-data">
+                                    <div class="form-field">
+                                        <label for="file-type">File Type:</label>
+                                        <select id="file-type" name="fileType" class="custom-dropdown">
+                                            <option value="pdf">PDF<i class="fa fa-angle-down"></i></option>
+                                            <option value="e-book">E-book</option>
 
-                                  
-                                  
-                                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                                  
-                                  
+                                        </select>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="pdf-file" class="upload-label">
+                                            <div class="upload-icon">
+                                                <img src="static\dist\images\upload.png" alt="Upload Icon"
+                                                    style="transform:scale(0.60)">
+                                            </div>
+                                            <div class="upload-text">
+                                                <span id="file-name">Drag and drop a file or click here to browse</span>
+                                            </div>
+                                        </label>
+                                        <input type="file" id="pdf-file" name="file" accept=".pdf"
+                                            onchange="updateFileName(this)">
+                                    </div>
 
-                                  
-                              </form>
-                              
+
+                                    <div class="form-field">
+                                        <input type="submit" value="Upload" class="upload-button">
+                                        <p id="file-size-limit" style="color: red; margin-top: 5px;"></p>
+
+                                    </div>
+
+                                    <div class="loading-spinner" id="loadingSpinner">
+                                        <div class="spinner"></div>
+                                    </div>
+
+
+
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+
+
+
+                                </form>
+
                             </div>
                         </div>
                     </div>
                 </section>
             </main>
 
-            <footer class="site-footer" >
-              <div class="container">
-                  <div class="site-footer-inner">
-                      <div class="brand footer-brand" >
-              <a href="#" >
-                <img class="header-logo-image" src="static/dist/images/logo.svg" alt="Logo">
-              </a>
-                      </div>
-                      <ul class="footer-links list-reset" >
-                          <li>
-                              <a href="https://www.bluetickconsultants.com/contact-us.html" style="color:#0f8afd;">Contact</a>
-                          </li>
-                          <li>
-                              <a href="https://www.bluetickconsultants.com/about-us.html" style="color:#0f8afd;">About us</a>
-                          </li>
-                          <li>
-                              <a href="terms_of_services.html" style="color:#0f8afd;">Terms of Services</a>
-                          </li>
-                          <li>
-                              <a href="privacy_policy.html" style="color:#0f8afd;">Privacy Policy</a>
-                          </li>
-                      </ul>
-                      <ul class="footer-social-links list-reset">
-                          <li>
-                              <a href="https://www.facebook.com/bluetickconsultants/" target="blank" >
-                                  <span class="screen-reader-text">Facebook</span>
-                                  <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z" fill="#0270D7"/>
-                                  </svg>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="https://twitter.com/BluetickConsult" target="blank">
-                                  <span class="screen-reader-text">Twitter</span>
-                                  <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-                                      <path d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z" fill="#0270D7"/>
-                                  </svg>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="https://www.linkedin.com/company/bluetick-consultants/" target="_blank">
-                                  <span class="screen-reader-text">LinkedIn</span>
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 72 72" id="linkedin">
-                                      <g fill="none" fill-rule="evenodd">
-                                          <rect width="72" height="72" fill="#117EB8" rx="4"></rect>
-                                          <path fill="#FFF" d="M13.139 27.848h9.623V58.81h-9.623V27.848zm4.813-15.391c3.077 0 5.577 2.5 5.577 5.577 0 3.08-2.5 5.581-5.577 5.581a5.58 5.58 0 1 1 0-11.158zm10.846 15.39h9.23v4.231h.128c1.285-2.434 4.424-5 9.105-5 9.744 0 11.544 6.413 11.544 14.75V58.81h-9.617V43.753c0-3.59-.066-8.209-5-8.209-5.007 0-5.776 3.911-5.776 7.95V58.81h-9.615V27.848z"></path>
-                                      </g>
-                                  </svg>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="https://www.instagram.com/officialbluetickconsultants/?hl=en" target="_blank">
-                                  <span class="screen-reader-text">Instagram</span>
-                                  <i class="fa-brands fa-instagram" style="font-size: 20px; color:#0270D7"></i>
-                              </a>
-                          </li>
-                      </ul>
-                      
-                      
-                      
-                      <div class="footer-copyright"> 2023 © All rights reserved by Bluetick Consultants LLP</div>
-                  </div>
-              </div>
-          </footer>
+            <footer class="site-footer">
+                <div class="container">
+                    <div class="site-footer-inner">
+                        <div class="brand footer-brand">
+                            <a href="#">
+                                <img class="header-logo-image" src="static/dist/images/logo.svg" alt="Logo">
+                            </a>
+                        </div>
+                        <ul class="footer-links list-reset">
+                            <li>
+                                <a href="https://www.bluetickconsultants.com/contact-us.html"
+                                    style="color:#0f8afd;">Contact</a>
+                            </li>
+                            <li>
+                                <a href="https://www.bluetickconsultants.com/about-us.html" style="color:#0f8afd;">About
+                                    us</a>
+                            </li>
+                            <li>
+                                <a href="terms_of_services.html" style="color:#0f8afd;">Terms of Services</a>
+                            </li>
+                            <li>
+                                <a href="privacy_policy.html" style="color:#0f8afd;">Privacy Policy</a>
+                            </li>
+                        </ul>
+                        <ul class="footer-social-links list-reset">
+                            <li>
+                                <a href="https://www.facebook.com/bluetickconsultants/" target="blank">
+                                    <span class="screen-reader-text">Facebook</span>
+                                    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z"
+                                            fill="#0270D7" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/BluetickConsult" target="blank">
+                                    <span class="screen-reader-text">Twitter</span>
+                                    <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z"
+                                            fill="#0270D7" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/company/bluetick-consultants/" target="_blank">
+                                    <span class="screen-reader-text">LinkedIn</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 72 72"
+                                        id="linkedin">
+                                        <g fill="none" fill-rule="evenodd">
+                                            <rect width="72" height="72" fill="#117EB8" rx="4"></rect>
+                                            <path fill="#FFF"
+                                                d="M13.139 27.848h9.623V58.81h-9.623V27.848zm4.813-15.391c3.077 0 5.577 2.5 5.577 5.577 0 3.08-2.5 5.581-5.577 5.581a5.58 5.58 0 1 1 0-11.158zm10.846 15.39h9.23v4.231h.128c1.285-2.434 4.424-5 9.105-5 9.744 0 11.544 6.413 11.544 14.75V58.81h-9.617V43.753c0-3.59-.066-8.209-5-8.209-5.007 0-5.776 3.911-5.776 7.95V58.81h-9.615V27.848z">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/officialbluetickconsultants/?hl=en" target="_blank">
+                                    <span class="screen-reader-text">Instagram</span>
+                                    <i class="fa-brands fa-instagram" style="font-size: 20px; color:#0270D7"></i>
+                                </a>
+                            </li>
+                        </ul>
+
+
+
+                        <div class="footer-copyright"> 2023 © All rights reserved by Bluetick Consultants LLP</div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
     <div class="overlay" id="overlay"></div>
     <script src="static/dist/js/base_url.js"></script>
     <script src="static/dist/js/darkmode.js"></script>
     <script>
-      // var baseURL = localStorage.getItem('baseURL');
+        // var baseURL = localStorage.getItem('baseURL');
 
-      function updateFileName(input) {
-        const fileName = input.files[0].name;
-        document.getElementById("file-name").textContent = fileName;
-      }
-      function updateFileSize(input) {
-        const fileSize = input.files[0].size;
-        const maxSize = 10 * 1024 * 1024; // 10MB in bytes
-        if (fileSize > maxSize) {
-          document.getElementById("file-size-limit").textContent =
-            "File size exceeds the maximum limit of 10MB.";
-          document.getElementById("upload-button").disabled = true;
-        } else {
-          document.getElementById("file-size-limit").textContent = "";
-          document.getElementById("upload-button").disabled = false;
+        function updateFileName(input) {
+            const fileName = input.files[0].name;
+            document.getElementById("file-name").textContent = fileName;
         }
-      }
-      document.getElementById("pdf-file").addEventListener("change", function (event) {
-        updateFileSize(event.target);
-      });
-      function showLoadingSpinner() {
-        document.getElementById("loadingSpinner").classList.add("active");
-        document.getElementById("overlay").style.display = "block";
-      }
-      function hideLoadingSpinner() {
-        document.getElementById("loadingSpinner").classList.remove("active");
-        document.getElementById("overlay").style.display = "none";
-      }
-      function submitForm() {
-          const fileInput = document.getElementById("pdf-file");
-          const file = fileInput.files[0];
-          const fileName = file ? file.name : ""; // Check if a file is selected
-          const fileSize = file ? file.size : 0; // Check if a file is selected
-          const maxSize = 10 * 1024 * 1024; // 10MB in bytes
-          const fileTypeSelect = document.getElementById("file-type");
-          const selectedFileType = fileTypeSelect.options[fileTypeSelect.selectedIndex].value;
-
-          var token = localStorage.getItem('token')
-
-          if (!file) {
-            alert("Please upload a file first.");
-            return;
-          }
-          if (selectedFileType === "pdf" && !fileName.toLowerCase().endsWith(".pdf")) {
-            alert("Please select a PDF file.");
-            return;
-          }
-        
-          if (selectedFileType === "e-book" && !fileName.toLowerCase().endsWith(".epub")) {
-            alert("Please select an eBook (EPUB) file.");
-            return;
-          }
-          if (fileSize > maxSize) {
-            alert("File size exceeds the maximum limit of 10MB.");
-            return;
-          }
-          const selectElement = document.getElementById("file-type");
-          const selectedValue = selectElement.value;
-
-          const user_id = localStorage.getItem("user_id");
-          const formData = new FormData();
-          formData.append('file', file);
-          formData.append('user_id', user_id);
-          formData.append('file_type', selectedValue);
-
-          
-
-          console.log(formData)
-        // Set CSRF token in the request headers
-        // const csrfToken = document.querySelector('input[name="csrf_token"]').value;
-        const headers = new Headers();
-        headers.append("Authorization", token);
-
-        showLoadingSpinner();
-        fetch(base_url + '/upload', {
-          method: "POST",
-          headers: headers,
-          body: formData,
-        })
-          .then((response) => {
-            // Handle the response here if needed
-            console.log(response);
-            hideLoadingSpinner();
-            // Display the loader for 6 seconds before redirecting to /ask
-            showLoaderFor6Seconds();
-          })
-          .catch((error) => {
-            // Handle errors here if needed
-            console.error(error);
-            hideLoadingSpinner();
-          });
-      }
-      function showLoaderFor6Seconds() {
-        const loader = document.getElementById("loadingSpinner");
-        loader.classList.add("active");
-        document.getElementById("overlay").style.display = "block";
-        setTimeout(function () {
-          hideLoadingSpinner();
-          window.location.href = "chatbot.html";
-        }, 6000);
-      }
-      document.getElementById("uploadForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-        submitForm();
-      });
-      document.addEventListener("DOMContentLoaded", () => {
-        const uploadLabel = document.querySelector(".upload-label");
-        uploadLabel.addEventListener("dragover", (event) => {
-          event.preventDefault();
-          uploadLabel.classList.add("dragover");
+        function updateFileSize(input) {
+            const fileSize = input.files[0].size;
+            const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+            if (fileSize > maxSize) {
+                document.getElementById("file-size-limit").textContent =
+                    "File size exceeds the maximum limit of 10MB.";
+                document.getElementById("upload-button").disabled = true;
+            } else {
+                document.getElementById("file-size-limit").textContent = "";
+                document.getElementById("upload-button").disabled = false;
+            }
+        }
+        document.getElementById("pdf-file").addEventListener("change", function (event) {
+            updateFileSize(event.target);
         });
-        uploadLabel.addEventListener("dragleave", () => {
-          uploadLabel.classList.remove("dragover");
+        function showLoadingSpinner() {
+            document.getElementById("loadingSpinner").classList.add("active");
+            document.getElementById("overlay").style.display = "block";
+        }
+        function hideLoadingSpinner() {
+            document.getElementById("loadingSpinner").classList.remove("active");
+            document.getElementById("overlay").style.display = "none";
+        }
+        function submitForm() {
+            const fileInput = document.getElementById("pdf-file");
+            const file = fileInput.files[0];
+            const fileName = file ? file.name : ""; // Check if a file is selected
+            const fileSize = file ? file.size : 0; // Check if a file is selected
+            const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+            const fileTypeSelect = document.getElementById("file-type");
+            const selectedFileType = fileTypeSelect.options[fileTypeSelect.selectedIndex].value;
+
+            var token = localStorage.getItem('token')
+
+            if (!file) {
+                alert("Please upload a file first.");
+                return;
+            }
+            if (selectedFileType === "pdf" && !fileName.toLowerCase().endsWith(".pdf")) {
+                alert("Please select a PDF file.");
+                return;
+            }
+
+            if (selectedFileType === "e-book" && !fileName.toLowerCase().endsWith(".epub")) {
+                alert("Please select an eBook (EPUB) file.");
+                return;
+            }
+            if (fileSize > maxSize) {
+                alert("File size exceeds the maximum limit of 10MB.");
+                return;
+            }
+            const selectElement = document.getElementById("file-type");
+            const selectedValue = selectElement.value;
+
+            const user_id = localStorage.getItem("user_id");
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('user_id', user_id);
+            formData.append('file_type', selectedValue);
+
+
+
+            console.log(formData)
+            // Set CSRF token in the request headers
+            // const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+            const headers = new Headers();
+            headers.append("Authorization", token);
+
+            showLoadingSpinner();
+            fetch(base_url + '/upload', {
+                method: "POST",
+                headers: headers,
+                body: formData,
+            })
+                .then((response) => {
+                    // Handle the response here if needed
+                    console.log(response);
+                    hideLoadingSpinner();
+                    // Display the loader for 6 seconds before redirecting to /ask
+                    showLoaderFor6Seconds();
+                })
+                .catch((error) => {
+                    // Handle errors here if needed
+                    console.error(error);
+                    hideLoadingSpinner();
+                });
+        }
+        function showLoaderFor6Seconds() {
+            const loader = document.getElementById("loadingSpinner");
+            loader.classList.add("active");
+            document.getElementById("overlay").style.display = "block";
+            setTimeout(function () {
+                hideLoadingSpinner();
+                window.location.href = "chatbot.html";
+            }, 6000);
+        }
+        document.getElementById("uploadForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            submitForm();
         });
-        uploadLabel.addEventListener("drop", (event) => {
-          event.preventDefault();
-          uploadLabel.classList.remove("dragover");
-          const file = event.dataTransfer.files[0];
-          const fileInput = document.getElementById("pdf-file");
-          fileInput.files = event.dataTransfer.files;
-          updateFileName(fileInput);
-          updateFileSize(fileInput);
+        document.addEventListener("DOMContentLoaded", () => {
+            const uploadLabel = document.querySelector(".upload-label");
+            uploadLabel.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                uploadLabel.classList.add("dragover");
+            });
+            uploadLabel.addEventListener("dragleave", () => {
+                uploadLabel.classList.remove("dragover");
+            });
+            uploadLabel.addEventListener("drop", (event) => {
+                event.preventDefault();
+                uploadLabel.classList.remove("dragover");
+                const file = event.dataTransfer.files[0];
+                const fileInput = document.getElementById("pdf-file");
+                fileInput.files = event.dataTransfer.files;
+                updateFileName(fileInput);
+                updateFileSize(fileInput);
+            });
         });
+        // Function to update the file type and name
+        function updateFileTypeAndName() {
+            const fileTypeSelect = document.getElementById("file-type");
+            const selectedFileType = fileTypeSelect.options[fileTypeSelect.selectedIndex].value;
+
+            const fileInput = document.getElementById("pdf-file");
+            if (selectedFileType === "pdf") {
+                fileInput.accept = ".pdf";
+            } else if (selectedFileType === "e-book") {
+                fileInput.accept = ".epub";
+            }
+        }
+
+        // Add event listener to the file type select element
+        const fileTypeSelect = document.getElementById("file-type");
+        fileTypeSelect.addEventListener("change", updateFileTypeAndName);
+
+        // Call the function initially to set the default file type
+        updateFileTypeAndName();
+
+
+        /*$("#logout_link").click(function () {
+          localStorage.clear();
+          location.href = "index.html";
       });
-      // Function to update the file type and name
-function updateFileTypeAndName() {
-  const fileTypeSelect = document.getElementById("file-type");
-  const selectedFileType = fileTypeSelect.options[fileTypeSelect.selectedIndex].value;
+  
+      document.getElementById("logoutButton").addEventListener("click", function() {
+        // Remove data from local storage
+        localStorage.removeItem("token");
+        localStorage.removeItem("user_id");
+  
+        // Redirect to the login page (replace "login.html" with your actual login page URL)
+        window.location.href = "index.html";
+      } 
+      )*/
 
-  const fileInput = document.getElementById("pdf-file");
-  if (selectedFileType === "pdf") {
-      fileInput.accept = ".pdf";
-  } else if (selectedFileType === "e-book") {
-      fileInput.accept = ".epub";
-  }
-}
+        function logout() {
+            const user_id = localStorage.getItem("user_id");
 
-// Add event listener to the file type select element
-const fileTypeSelect = document.getElementById("file-type");
-fileTypeSelect.addEventListener("change", updateFileTypeAndName);
+            if (user_id) {
+                var data = {
+                    user_id: user_id,
+                };
 
-// Call the function initially to set the default file type
-updateFileTypeAndName();
+                fetch(base_url + '/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        localStorage.removeItem("token");
+                        localStorage.removeItem("user_id");
+                        localStorage.clear();
+                        window.location.href = "index.html";
+                    })
+                    .catch(error => {
+                        alert(error.message);
+                    });
+            } else {
+                // Redirect to the login page
+                const popupMessage = "Session expired. Please login again.";
+                localStorage.setItem("popupMessage", popupMessage);
+                window.location.href = "login.html";
+            }
+        }
 
+        // Function to continuously check user_id and log out if not present
+        function checkUserAndLogout() {
+            const user_id = localStorage.getItem("user_id");
+            if (!user_id) {
+                logout();
+            }
+        }
 
-      /*$("#logout_link").click(function () {
-        localStorage.clear();
-        location.href = "index.html";
-    });
-
-    document.getElementById("logoutButton").addEventListener("click", function() {
-      // Remove data from local storage
-      localStorage.removeItem("token");
-      localStorage.removeItem("user_id");
-
-      // Redirect to the login page (replace "login.html" with your actual login page URL)
-      window.location.href = "index.html";
-    } 
-    )*/
-    
-  function logout() {
-      const user_id = localStorage.getItem("user_id");
-
-      if (user_id) {
-          var data = {
-              user_id: user_id,
-          };
-
-          fetch(base_url + '/logout', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-          })
-          .then(response => {
-              localStorage.removeItem("token");
-              localStorage.removeItem("user_id");
-              localStorage.clear();
-              window.location.href = "index.html";
-          })
-          .catch(error => {
-              alert(error.message);
-          });
-      } else {
-            // Redirect to the login page
-            const popupMessage = "Session expired. Please login again.";
-            localStorage.setItem("popupMessage", popupMessage);
-            window.location.href = "login.html";
-      }
-  }
-
-// Function to continuously check user_id and log out if not present
-function checkUserAndLogout() {
-  const user_id = localStorage.getItem("user_id");
-  if (!user_id) {
-      logout();
-  }
-}
-
-// Call the checkUserAndLogout function every 1000 milliseconds (1 second)
-setInterval(checkUserAndLogout, 1000);
+        // Call the checkUserAndLogout function every 1000 milliseconds (1 second)
+        setInterval(checkUserAndLogout, 1000);
 
     </script>
 </body>
+
 </html>

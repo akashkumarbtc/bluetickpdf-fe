@@ -570,7 +570,7 @@ label {
   }
 }
 .container {
-  max-width: 1128px;
+  max-width: 1128px; display: table;
 }
 .container-sm {
   max-width: 848px;
@@ -1102,7 +1102,7 @@ label {
   
     /* Gradient background for the site header */
 /* Gradient background for the site header */
-body .site-header::before {
+/* body .site-header::before {
     content: "";
     position: absolute;
     top: 0;
@@ -1112,7 +1112,7 @@ body .site-header::before {
     background: linear-gradient(80deg, rgba(36, 40, 48,0) 0%, rgba(36, 40, 48, 0) 100%);
     transform-origin: 0;
     transform: skewY(-12deg);
-  }
+  } */
   
  
   
@@ -1624,8 +1624,8 @@ main {
   }
   .site-footer-inner {
     justify-content: space-between;
-    padding-top: 64px;
-    padding-bottom: 64px;
+    padding-top: 32px;
+    padding-bottom: 32px;
   }
   .footer-brand,
   .footer-links,

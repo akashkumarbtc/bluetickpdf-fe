@@ -12,6 +12,10 @@
     <script src="https://unpkg.com/scrollreveal@4.0.0/static/dist/scrollreveal.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        .logo { float: left; }
+        .switchwrap { float: right; }
+        main { width: 100%; float: left; }
+        a { display: block; }
         a,
         button {
             cursor: pointer;
@@ -31,13 +35,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            /* height: 100vh; */
         }
 
         .login-form {
             max-width: 400px;
             width: 100%;
-            margin-bottom:200px;
+            margin-bottom: 0px;
             padding: 20px;
             background-color: black;
             border-radius: 14px;
@@ -149,10 +153,10 @@
         /* Styles for the toggle switch */
         .toggle-switch {
           display: inline-block;
-          position: relative;
-          width: 48px;
-          height: 34px;
-          margin: -50px 280px;
+            position: relative;
+            width: 48px;
+            height: 26px;
+            margin: 20px 280px;
         }
         
         /* Hide the checkbox */
@@ -228,33 +232,26 @@
           right: 4px;
           transform: scale(0);
         }
-        
-    
     </style>
+    <link rel="stylesheet" href='static/custom.css'>
 </head>
 <body class="is-boxed has-animations">
 <div class="body-wrap">
     <div class="card">
         <header class="site-header">
             <div class="container">
-                <div class="site-header-inner">
-                    <div class="brand header-brand">
-                        <h1 class="m-0">
-                            <a href="/">
-                                <img class="header-logo-image" src="static/dist/images/blueticklogo.png" alt="Logo"
-                                     style=" transform: scale(1.0)">
-                            </a>
-                        </h1>
-                    </div>
-                    <!-- Add a toggle switch to activate/deactivate light mode -->
+                <div class="logo">
+                    <a href="/"><img src="static/dist/images/blueticklogo.png" alt="Logo"></a>
+                </div>
+                <!-- Add a toggle switch to activate/deactivate light mode -->
+                <div class="switchwrap">
                     <label class="toggle-switch">
                         <input type="checkbox" id="toggle-light-mode">
                         <span class="switch">
+                            <span class="icon moon">&#9790;</span>
                             <span class="icon sun">&#9728;</span>
-                          <span class="icon moon">&#9790;</span>
-                          
                         </span>
-                      </label>
+                    </label>
                 </div>
             </div>
         </header>
@@ -290,10 +287,8 @@
                 </div>
               </div>
             </section>
-          </main>
-          
-
-          <footer class="site-footer" >
+        </main>
+        <footer class="site-footer" >
             <div class="container">
                 <div class="site-footer-inner">
                     <div class="brand footer-brand" >

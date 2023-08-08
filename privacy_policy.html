@@ -31,7 +31,7 @@
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 20px;
-            color: #fff;
+            color: #000000;
         }
 
         a {
@@ -56,14 +56,6 @@
         .site-header .brand a {
             display: inline-block;
         }
-
-
-       
-
-        
-
-        
-
         .site-footer {
             background-color: #f5f5f5;
             padding: 20px 0;
@@ -81,10 +73,18 @@
         <div class="card">
             <header class="site-header">
                 <div class="container">
-                    <div class="brand">
-                        <a href="/">
-                            <img src="static/dist/images/blueticklogo.png" alt="BluetickPDF Logo" style="mix-blend-mode: screen; transform: scale(1.0)">
-                        </a>
+                    <div class="logo">
+                        <a href="/"><img src="static/dist/images/blueticklogo.png" alt="Logo"></a>
+                    </div>
+                    <!-- Add a toggle switch to activate/deactivate light mode -->
+                    <div class="switchwrap">
+                        <!-- <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-light-mode">
+                            <span class="switch">
+                                <span class="icon moon">&#9790;</span>
+                                <span class="icon sun">&#9728;</span>
+                            </span>
+                        </label> -->
                     </div>
                 </div>
             </header>
