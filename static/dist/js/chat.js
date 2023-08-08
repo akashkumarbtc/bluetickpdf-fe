@@ -26,7 +26,20 @@ message_input.addEventListener("focus", () => {
 });
 
 const delete_conversations = async () => {
-  localStorage.clear();
+  const prefix = "conversation:";
+  let keysToRemove = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    // Check if the key starts with the specified prefix
+    if (key.startsWith(prefix)) {
+      keysToRemove.push(key);
+    }
+  }
+  // Remove the keys that matched the prefix
+  keysToRemove.forEach((key) => {
+    localStorage.removeItem(key);
+  });
+  // localStorage.clear()
   await new_conversation();
 };
 
@@ -75,13 +88,15 @@ const ask_gpt = async (message) => {
             <div class="message">
                 <div class="user">
                     ${user_image}
-                    <i class="fa-regular fa-phone-arrow-up-right"></i>
+                    
                 </div>
                 <div class="content" id="user_${token}"> 
                     ${format(message)}
                 </div>
             </div>
         `;
+
+        // <i class="fa-regular fa-phone-arrow-up-right"></i>
 
     /* .replace(/(?:\r\n|\r|\n)/g, '<br>') */
 
@@ -93,13 +108,15 @@ const ask_gpt = async (message) => {
     message_box.innerHTML += `
             <div class="message">
                 <div class="user">
-                    ${gpt_image} <i class="fa-regular fa-phone-arrow-down-left"></i>
+                    ${gpt_image} 
                 </div>
                 <div class="content" id="gpt_${window.token}">
                     <div id="cursor"></div>
                 </div>
             </div>
         `;
+
+        // <i class="fa-regular fa-phone-arrow-down-left"></i>
 
     message_box.scrollTop = message_box.scrollHeight;
     window.scrollTo(0, 0);

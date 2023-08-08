@@ -411,7 +411,7 @@ h6,
     letter-spacing: -0.1px;
   }
 }
-.text-light h1,
+/* .text-light h1,
 .text-light h2,
 .text-light h3,
 .text-light h4,
@@ -424,7 +424,7 @@ h6,
 .text-light .h5,
 .text-light .h6 {
   color: !important;
-}
+} */
 .text-sm {
   font-size: 18px;
   line-height: 28px;

@@ -26,7 +26,7 @@
 
     --accent: #00008b;
     --blur-bg: white;
-    --blur-border: black;
+    --blur-border: rgb(135, 135, 135);
     --user-input: black;
     --conversations: black;
 }
@@ -257,7 +257,7 @@ body {
     right: 0;
     height: 60%;
     width: 60%;
-    background: var(--colour-3);
+    /* background: var(--colour-3); */
     filter: blur(10px) opacity(0.5);
     z-index: 10000;
 }
