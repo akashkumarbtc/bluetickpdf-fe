@@ -232,6 +232,24 @@
           right: 4px;
           transform: scale(0);
         }
+        /* Styles for side-by-side links */
+        .side-by-side-links {
+            display: flex;
+            align-items: center;
+        }
+        
+        .side-by-side-links a {
+            font-size:15px;
+            margin-right: 10px;
+            text-decoration: underline;
+            
+        }
+        
+        .side-by-side-links .divider {
+            margin: 0px 27px;
+            color: #777;
+        }
+        
     </style>
     <link rel="stylesheet" href='static/custom.css'>
 </head>
@@ -279,7 +297,11 @@
                                     <input id="submit" name="submit" type="submit" value="Login">
                                 </div>
                                 <div class="form-field">
-                                    <a href="register.html">Don't Have an Account?</a>
+                                    <div class="side-by-side-links">
+                                        <a href="forgot_password.html">Forgot Password?</a>
+                                        <span class="divider">|</span>
+                                        <a href="register.html">Don't Have an Account?</a>
+                                    </div>
                                 </div>
                             </form>
                         </div>
