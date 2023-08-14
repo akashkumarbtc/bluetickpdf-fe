@@ -221,6 +221,21 @@
             right: 4px;
             transform: scale(0);
         }
+        /* CSS animation for spinning circle */
+        .loading-animation {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+    
+        .loading-animation .fa-spinner {
+            animation: spin 1s infinite linear;
+        }
+    
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
     <link rel="stylesheet" href='static/custom.css'>
 </head>
@@ -255,6 +270,10 @@
                                 <!-- {% if user_exist %}
                             <p style="color:red">The username is already taken</p>
                             {% endif %} -->
+                             <!-- Add a loading animation with spinning circle -->
+    <div class="loading-animation">
+        <i class="fa-solid fa-spinner animate-spin"></i> Loading...
+    </div>
                                 <form class="register-form-fields" method="POST">
                                     <!-- <input id="csrf_token" name="csrf_token" type="hidden" value="IjZkMWYyODJiNWJkZGE1MjIzZjBiY2MzOGEzN2IxMmI3ZjhhNDkxNmYi.ZLpyaw.CJfysviDDPs0bvSEFMwtufs_99c"> -->
                                     <div class="form-field">
@@ -372,6 +391,9 @@
             var passwordInput = document.querySelector('#password');
             var username = usernameInput.value.trim();
             var password = passwordInput.value;
+            // Toggle visibility of loading animation
+        var loadingAnimation = document.querySelector('.loading-animation');
+        loadingAnimation.style.display = 'block';
 
             var data = {
                 email: username,
@@ -391,6 +413,8 @@
                     return response.json();
                 })
                 .then(data => {
+                    // Hide the loading animation
+            loadingAnimation.style.display = 'none';
                     if (data.error){
                         alert(data.error);
                     }
@@ -403,6 +427,8 @@
                     }
                 })
                 .catch(error => {
+                    // Hide the loading animation
+            loadingAnimation.style.display = 'none';
                     alert(error.message);
                 });
         });
