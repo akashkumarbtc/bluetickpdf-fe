@@ -387,17 +387,20 @@
                 body: JSON.stringify(data)
             })
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Register failed. Please try again!.');
-                    }
+                    
                     return response.json();
                 })
                 .then(data => {
+                    if (data.error){
+                        alert(data.error);
+                    }
+                    else{
                     alert("Verification link sent to the email. Please verify to login!");
 
 
                     // Redirect to login.html
                     window.location.href = "login.html";
+                    }
                 })
                 .catch(error => {
                     alert(error.message);
