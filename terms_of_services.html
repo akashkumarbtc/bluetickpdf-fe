@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Terms of Service - BluetickPDF</title>
+    <link rel="icon" href="static/dist/images/gpt.png">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" href="static/dist/css/style.css">
     <style>
@@ -44,6 +45,7 @@
         }
 
         .site-header .container {
+            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -71,28 +73,131 @@
             margin: 0;
             color: black;
         }
+        body.dark-mode{
+            color:white;
+        }
+        /* Add the following styles to maintain the text color of links in dark mode */
+body.dark-mode a {
+    color: #8cc4ff;
+}
+body.dark-mode p {
+    color: #8cc4ff;
+}
+body.dark-mode ul {
+    color: #8cc4ff;
+}
+
+body.dark-mode a:hover {
+    color: #6aa2d8;
+}
+* Styles for the toggle switch */
+        .toggle-switch {
+            display: inline-block;
+            position: absolute;
+            top: 50%; /* Position vertically at the middle of the container */
+            right: 20px; /* Position to the right with a margin */
+            transform: translateY(-50%); /* Adjust vertical positioning */
+            width: 48px;
+            height: 26px;
+        }
+
+        /* Hide the checkbox */
+        .toggle-switch input {
+            display: none;
+        }
+
+        /* Styles for the switch track */
+        .toggle-switch .switch {
+            position: absolute;
+            top: 5;
+            left: 1200;
+            width: 48px;
+            height: 24px;
+            border-radius: 12px;
+            background-color: #242830;
+            /* Default switch color */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Styles for the switch thumb */
+        .toggle-switch input:checked+.switch {
+            background-color: #097dea;
+            /* Switch color in light mode */
+        }
+
+        /* Styles for the thumb icon (optional) */
+        .toggle-switch .icon {
+            position: absolute;
+            top: -3px;
+            font-size: 18px;
+            color: #fff;
+            /* Icon color */
+            transition: transform 0.3s ease;
+        }
+
+        /* Moon and sun icons */
+        .toggle-switch .icon.moon {
+            left: 4px;
+        }
+
+        .toggle-switch .icon.sun {
+            right: 4px;
+            transform: scale(0);
+        }
+
+        /* Show sun icon in light mode */
+        .toggle-switch input:checked+.switch .icon.moon {
+            transform: scale(0);
+        }
+
+        .toggle-switch input:checked+.switch .icon.sun {
+            transform: scale(1);
+        }
+
+        /* Dark mode styles */
+        .dark-mode .toggle-switch .switch {
+            background-color: #0270d7;
+        }
+
+        .dark-mode .toggle-switch input:checked+.switch {
+            background-color: #1b1d23;
+        }
+
+        .dark-mode .toggle-switch .icon {
+            color: lightblue;
+        }
+
+        .dark-mode .toggle-switch .icon.moon {
+            left: 4px;
+            transform: scale(1);
+        }
+
+        .dark-mode .toggle-switch .icon.sun {
+            right: 4px;
+            transform: scale(0);
+        }
+       
     </style>
 </head>
 <body class="is-boxed has-animations">
     <div class="body-wrap">
         <div class="card">
-            <header class="site-header">
+            <div class="site-header">
                 <div class="container">
                     <div class="logo">
                         <a href="/"><img src="static/dist/images/blueticklogo.png" alt="Logo"></a>
                     </div>
-                    <!-- Add a toggle switch to activate/deactivate light mode -->
-                    <div class="switchwrap">
-                        <!-- <label class="toggle-switch">
-                            <input type="checkbox" id="toggle-light-mode">
-                            <span class="switch">
-                                <span class="icon moon">&#9790;</span>
-                                <span class="icon sun">&#9728;</span>
-                            </span>
-                        </label> -->
-                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-light-mode">
+                        <span class="switch">
+                            <span class="icon sun">&#9728;</span>
+                            <span class="icon moon">&#9790;</span>
+                        </span>
+                    </label>
                 </div>
-            </header>
+            </div>
+            
 
             <main>
                 <section>
@@ -155,4 +260,5 @@
         </div>
     </div>
 </body>
+<script src="static/dist/js/darkmode.js"></script>
 </html>
