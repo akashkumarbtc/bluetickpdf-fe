@@ -250,6 +250,44 @@
             margin: 0px 27px;
             color: #777;
         }
+        .custom-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0s 0.3s;
+        }
+        
+        .popup-content {
+            background-color: #000;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        #popup-close {
+            margin-top: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        #popup-close:hover {
+            background-color: #0056b3;
+        }
         
     </style>
     <link rel="stylesheet" href='static/custom.css'>
@@ -280,6 +318,14 @@
                 <div class="container">
                     <div class="login-inner">
                         <div class="login-form">
+                            
+                            <div id="custom-popup" class="custom-popup">
+                                <div class="popup-content">
+                                    <p class="popup-message"></p> <!-- Add this line -->
+                                    <button id="popup-close">Close</button>
+                                </div>
+                                
+                            </div>
                             <h2 class="login-title mt-0">Login</h2>
                             <!-- {% if user_not_exist %}
                             <p style="color:red">Username or password invalid</p>
@@ -383,6 +429,22 @@
 <script src="static/dist/js/darkmode.js"></script>
 <script>
     // var baseURL = localStorage.getItem('baseURL');
+    function showCustomPopup(message) {
+        var popup = document.getElementById('custom-popup');
+        var popupMessage = popup.querySelector('.popup-message'); // Select the .popup-message element
+    
+        popupMessage.textContent = message;
+    
+        popup.style.opacity = 1;
+        popup.style.visibility = 'visible';
+    }
+    
+            // Function to close the custom popup
+            function closeCustomPopup() {
+                var popup = document.getElementById('custom-popup');
+                popup.style.opacity = 0;
+                popup.style.visibility = 'hidden';
+            }
 
 
     $('form').submit(function (e) {
@@ -411,7 +473,7 @@
             })
             .then(data => {
                 if (data.error) {
-                    alert(data.error);
+                    showCustomPopup(data.error);
                 } else if (data.token && data.user_id) {
                     const token = data.token;
                     const user_id = data.user_id;
@@ -423,19 +485,22 @@
                     // Redirect to upload.html
                     window.location.href = "upload.html";
                 } else {
-                    alert("Login failed. Please check your credentials.");
+                    showCustomPopup("Login failed. Please check your credentials.");
                 }
             })
             .catch(error => {
-                alert(error.message);
+                showCustomPopup(error.message);
             });
         });
         document.addEventListener("DOMContentLoaded", () => {
             const popupMessage = localStorage.getItem("popupMessage");
             if (popupMessage) {
-                alert(popupMessage);
+                showCustomPopup(popupMessage);
                 localStorage.removeItem("popupMessage");
             }
+
+            // Close the custom popup when the "Close" button is clicked
+            document.getElementById('popup-close').addEventListener('click', closeCustomPopup);
         });
 </script>
 

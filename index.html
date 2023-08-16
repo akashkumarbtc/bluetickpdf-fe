@@ -227,6 +227,43 @@ button[type="submit"]:focus {
 .dark-mode button[type="submit"]:hover {
     background-color: #0056b3;
 }
+.feature-box {
+    width: 300px; /* Set your desired fixed width */
+    border: 3px solid #dddddd;
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    background-color: #f5f5f5;
+    transition: transform 0.3s ease;
+    
+    height: 320px; /* Set a fixed height for the feature box */
+    overflow: hidden; /* Hide overflowing content */
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+    background-color: #f7f7f7;
+}
+/* Dark mode styles */
+.dark-mode .feature-box {
+    background-color: #2c2c2c;
+    border: 2px solid #464646;
+    box-shadow: 0px 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .feature-box:hover {
+    background-color: #1b1b1b;
+}
+
+.dark-mode .feature-content {
+    color: #ffffff;
+}
+
+.dark-mode .feature-icon {
+    color: #8cc4ff;
+}
+
     </style>
     <link rel="stylesheet" href='static/custom.css'>
 </head>
@@ -256,10 +293,8 @@ button[type="submit"]:focus {
                     <div class="hero-inner">
                         <div class="hero-copy">
                             <h1 class="hero-title mt-0">Analyze and Query over your PDF using BluetickPDF</h1>
-                            <p class="hero-paragraph">Discover hidden gems in PDFs with our powerful blend of natural
-                                language processing, machine learning and advanced search technologies, gaining profound
-                                insights into the written word. </p>
-                            <div class="hero-cta"><a class="button button-primary" href="login.html">Get Started</a><a
+                            <p class="hero-paragraph">Unearth PDF treasures effortlessly with BluetickPDF: Your NLP-powered portal to unveil insights, harnessing AI and advanced search for unparalleled document analysis.</p>
+                            <div class="hero-cta"><a class="button button-primary" href="login.html">Start for Free</a><a
                                     class="button" id="openFormBtn">Get in touch</a>
                                 <div id="contactForm" class="modal">
                                     <div class="modal-content">
@@ -307,53 +342,65 @@ button[type="submit"]:focus {
                     <h2 class="section-title mt-0" style="text-align: center;">A quick guide to use BluetickPDF</h2>
                     <div class="features-inner section-inner has-bottom-divider">
                         <div class="features-wrap d-flex justify-content-center">
+
                             <div class="feature text-center is-revealing">
-                                <div class="feature-inner">
+    <div class="feature-box feature-animation ">
+        <div class="feature-icon">
+            <i class="fas fa-sign-in-alt fa-lg"></i>
+        </div>
+        <div class="feature-content">
+            <h4 class="feature-title mt-24">Login</h4>
+            <p class="hero-paragraph" style="text-align:justify;">Logging in is effortless with BluetickPDF. Say goodbye to
+                account creation and password hassles. Simply log in using your Google account.
+            </p>
+        </div>
+    </div>
+</div>
+                            <div class="feature text-center is-revealing">
+                                <div class="feature-box feature-animation ">
                                     <div class="feature-icon">
-                                        <img src="static/dist/images/feature-icon-01.svg" alt="Feature 01">
+                                        <i class="fas fa-file-upload fa-lg"></i>
                                     </div>
-                                    <h4 class="feature-title mt-24">Login</h4>
-                                    <p class="hero-paragraph">Logging in is effortless with BluetickPDF. Say goodbye to
-                                        account creation and password hassles. Simply log in using your Google account.
-                                    </p>
+                                    <div class="feature-content">
+                                        <h4 class="feature-title mt-24">Upload your PDF</h4>
+                                        <p class="text-sm mb-0" style="text-align:justify;">Whether you have scientific papers, academic articles,
+                                            books, manuals, or training materials, you can easily upload your PDF documents
+                                            to BluetickPDF. Just drag and drop your PDF file.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="feature text-center is-revealing">
-                                <div class="feature-inner">
+                                <div class="feature-box feature-animation ">
                                     <div class="feature-icon">
-                                        <img src="static/dist/images/feature-icon-02.svg" alt="Feature 01">
+                                        <i class="fas fa-question-circle fa-lg"></i>
                                     </div>
-                                    <h4 class="feature-title mt-24">Upload your PDF</h4>
-                                    <p class="text-sm mb-0">Whether you have scientific papers, academic articles,
-                                        books, manuals, or training materials, you can easily upload your PDF documents
-                                        to BluetickPDF. Just drag and drop your PDF file.</p>
+                                    <div class="feature-content">
+                                        <h4 class="feature-title mt-24">Query Functionality</h4>
+                                        <p class="text-sm mb-0" style="text-align:justify;">Submit your PDF queries to BluetickPDF, and our advanced AI will promptly deliver accurate and comprehensive responses to meet your informational needs.</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="feature text-center is-revealing">
-                                <div class="feature-inner">
+                                <div class="feature-box feature-animation ">
                                     <div class="feature-icon">
-                                        <img src="static/dist/images/feature-icon-03.svg" alt="Feature 02">
+                                        <i class="fas fa-lock fa-lg"></i>
                                     </div>
-                                    <h4 class="feature-title mt-24">Query Functionality</h4>
-                                    <p class="text-sm mb-0">Ask BluetickPDF any question related to your PDFs, and we
-                                        will provide you with the answers you need.</p>
+                                    <div class="feature-content">
+                                        <h4 class="feature-title mt-24">Enhanced Security</h4>
+                                        <p class="text-sm mb-0" style="text-align:justify;">Rest assured that your files will not be stored anywhere.
+                                            Furthermore, all your data will be deleted once you log out from the website.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="feature text-center is-revealing">
-                                <div class="feature-inner">
-                                    <div class="feature-icon">
-                                        <img src="static/dist/images/feature-icon-04.svg" alt="Feature 03">
-                                    </div>
-                                    <h4 class="feature-title mt-24">Enhanced Security</h4>
-                                    <p class="text-sm mb-0">Rest assured that your files will not be stored anywhere.
-                                        Furthermore, all your data will be deleted once you log out from the website.
-                                    </p>
-                                </div>
-                            </div>
+                            
+                            
                         </div>
                     </div>
                 </div>
             </section>
+            
+            
 
 
 

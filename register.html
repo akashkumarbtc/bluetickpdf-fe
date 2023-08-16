@@ -237,6 +237,45 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .custom-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0s 0.3s;
+        }
+        
+        .popup-content {
+            background-color: #000;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        #popup-close {
+            margin-top: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        #popup-close:hover {
+            background-color: #0056b3;
+        }
+        
     </style>
     <link rel="stylesheet" href='static/custom.css'>
 </head>
@@ -266,7 +305,18 @@
                 <section class="login-section">
                     <div class="container">
                         <div class="login-inner">
+                            
                             <div class="register-form">
+
+                                <div id="custom-popup" class="custom-popup">
+                                    <div class="popup-content">
+                                        <p class="popup-message"></p> <!-- Add this line -->
+                                        <button id="popup-close">Close</button>
+                                    </div>
+                                    
+                                </div>
+                                
+
                                 <h2 class="login-title mt-0">Register</h2>
                                 <!-- {% if user_exist %}
                             <p style="color:red">The username is already taken</p>
@@ -382,59 +432,77 @@
     <script src="static/dist/js/base_url.js"></script>
     <script src="static/dist/js/darkmode.js"></script>
     <script>
+        // Function to show the custom popup with a message
+        // Update the showCustomPopup function
+function showCustomPopup(message) {
+    var popup = document.getElementById('custom-popup');
+    var popupMessage = popup.querySelector('.popup-message'); // Select the .popup-message element
 
-        // var baseURL = localStorage.getItem('baseURL');
+    popupMessage.textContent = message;
 
+    popup.style.opacity = 1;
+    popup.style.visibility = 'visible';
+}
 
-        $('.register-form-fields').submit(function (e) {
-            e.preventDefault()
-            var usernameInput = document.querySelector('#username');
-            var passwordInput = document.querySelector('#password');
-            var username = usernameInput.value.trim();
-            var password = passwordInput.value;
-            // Toggle visibility of loading animation
-        var loadingAnimation = document.querySelector('.loading-animation');
-        loadingAnimation.style.display = 'block';
-
-            var data = {
-                email: username,
-                password: password
-            };
-            console.log(data)
-
-            fetch(base_url + '/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => {
-                    
-                    return response.json();
+        // Function to close the custom popup
+        function closeCustomPopup() {
+            var popup = document.getElementById('custom-popup');
+            popup.style.opacity = 0;
+            popup.style.visibility = 'hidden';
+        }
+    
+        $(document).ready(function () {
+            // Submit event handler for the registration form
+            $('.register-form-fields').submit(function (e) {
+                e.preventDefault();
+                var usernameInput = document.querySelector('#username');
+                var passwordInput = document.querySelector('#password');
+                var username = usernameInput.value.trim();
+                var password = passwordInput.value;
+        
+                var loadingAnimation = document.querySelector('.loading-animation');
+                loadingAnimation.style.display = 'block';
+                var data = {
+                    email: username,
+                    password: password
+                };
+        
+                fetch(base_url + '/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
                 })
+                .then(response => response.json())
                 .then(data => {
-                    // Hide the loading animation
-            loadingAnimation.style.display = 'none';
-                    if (data.error){
-                        alert(data.error);
-                    }
-                    else{
-                    alert("Verification link sent to the email. Please verify to login!");
-
-
-                    // Redirect to login.html
-                    window.location.href = "login.html";
+                    console.log('Server response:', data); // Add this line for debugging
+                    loadingAnimation.style.display = 'none';
+                    if (data.error) {
+                        showCustomPopup(data.error);
+                    } else {
+                        showCustomPopup("Verification link sent to the email. Please verify to login!");
+        
+                        // Redirect to login.html after a delay
+                        /*setTimeout(function () {
+                            window.location.href = "login.html";
+                        }, 3000);
+                        */
                     }
                 })
                 .catch(error => {
-                    // Hide the loading animation
-            loadingAnimation.style.display = 'none';
-                    alert(error.message);
+                    console.error('Fetch error:', error); // Add this line for debugging
+                    loadingAnimation.style.display = 'none';
+                    showCustomPopup('An error occurred. Please try again.');
                 });
+            });
+        
+            // Close the custom popup when the "Close" button is clicked
+            document.getElementById('popup-close').addEventListener('click', closeCustomPopup);
         });
-
+        
     </script>
+    
 
 </body>
 
