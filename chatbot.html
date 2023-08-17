@@ -171,13 +171,16 @@
         </div>
         <div class="user-input">
             <div class="box input-box">
-                <form onsubmit="event.preventDefault(); sendMessage();">
-                    <textarea id="message-input" name="question" placeholder="Ask a question" cols="30" rows="10" style="white-space: pre-wrap;"></textarea>
-                    <div id="send-button" >
-                        <i onclick="sendMessage()" class="fa-regular fa-paper-plane-top" style="margin-left:1170px;margin-bottom:55px;"></i>
+                <form onsubmit="event.preventDefault(); sendMessage();" style="position: relative;">
+                    <textarea id="message-input" name="question" placeholder="Ask a question" cols="120" rows="10" style="white-space: pre-wrap;"></textarea>
+                    <div id="send-button" style="position: absolute; bottom: 10px; right: -100px;">
+                        <button type="submit" onclick="sendMessage()" class="button button-primary button-wide-mobile" style="margin: 10px;">Submit</button>
                     </div>
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 </form>
+                
+                
+                
             </div>
         </div>
         <div class="buttons">
@@ -206,7 +209,7 @@
                   </select>
             </div>
             <div class="field">
-                <a id="logoutButton" class="button" onclick="logout()">
+                <a id="logoutButton" class="button" onclick="logout()" style="background-color:#0270d7">
                     <i class="fa-regular fa-sign-out-alt"></i>
                     Logout
                 </a>

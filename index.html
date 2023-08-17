@@ -263,6 +263,24 @@ button[type="submit"]:focus {
 .dark-mode .feature-icon {
     color: #8cc4ff;
 }
+/* Default styles for light mode */
+.cta-inner {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Dark mode styles */
+.dark-mode .cta-inner {
+    background-color: #000;
+   
+}
+.dark-mode .pricing-table-inner {
+    background-color: #f5f5f5;
+}
+
+
+
+
 
     </style>
     <link rel="stylesheet" href='static/custom.css'>
@@ -370,9 +388,9 @@ button[type="submit"]:focus {
                                 </div>
                             </div>
                             <div class="feature text-center is-revealing">
-                                <div class="feature-box feature-animation ">
+                                <div class="feature-box feature-animation">
                                     <div class="feature-icon">
-                                        <i class="fas fa-question-circle fa-lg"></i>
+                                        <i class="fas fa-search fa-lg"></i>
                                     </div>
                                     <div class="feature-content">
                                         <h4 class="feature-title mt-24">Query Functionality</h4>
@@ -380,6 +398,8 @@ button[type="submit"]:focus {
                                     </div>
                                 </div>
                             </div>
+                            
+                            
                             <div class="feature text-center is-revealing">
                                 <div class="feature-box feature-animation ">
                                     <div class="feature-icon">
@@ -404,7 +424,7 @@ button[type="submit"]:focus {
 
 
 
-            <section class="pricing section">
+            <section class="pricing section dark-mode-light">
                 <div class="container-sm">
                     <div class="pricing-inner section-inner">
                         <div class="pricing-header text-center">
@@ -424,16 +444,14 @@ button[type="submit"]:focus {
                                                     style="color:white;">$0</span><span class="text-xs"
                                                     style="color:white;">/month</span></div>
                                         </div>
-                                        <div class="pricing-table-features-title text-xs pt-24 pb-24">What you will get
+                                        <div class="pricing-table-features-title text-xs pt-24 pb-24" style="color:white;">What you will get
                                         </div>
                                         <ul class="pricing-table-features list-reset text-xs" style="color:white;">
                                             <li>
                                                 <span>
-                                                    <strong>Query:</strong> 1 PDF - Maximum 10MB
+                                                    <strong>Query:</strong> 1 PDF/E-Book - Maximum 10MB
                                                 </span>
                                             </li>
-
-
                                             <li>
                                                 <span>Enhanced Security</span>
                                             </li>
@@ -454,38 +472,35 @@ button[type="submit"]:focus {
                                             </li>
                                         </ul>
                                     </div>
-                                    <!--
-                                    <div class="pricing-table-cta mb-8">
-                                        <a class="button button-primary button-shadow button-block" href="#">Pre order now</a>
-                                    </div>
-                                    -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+            
 
-            <!--
+            
 
-			<section class="cta section">
-				<div class="container">
-					<div class="cta-inner section-inner">
-						<h3 class="section-title mt-0">Still not convinced on buying?</h3>
-						<div class="cta-cta">
-							<a class="button button-primary button-wide-mobile" href="https://www.bluetickconsultants.com/">Get in touch</a>
-						</div>
-					</div>
-				</div>
-			</section>
-            -->
+			<section class="cta section dark-mode-light">
+                <div class="container">
+                    <div class="cta-inner section-inner">
+                        <h3 class="section-title mt-0">Experience the power of our service with a free trial </h3>
+                        <div class="cta-cta">
+                            <a class="button button-primary button-wide-mobile" href="login.html">Try now for Free</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            
         </main>
 
         <footer class="site-footer">
             <div class="container">
                 <div class="site-footer-inner">
                     <div class="brand footer-brand">
-                        <a class="button button-primary" href="login.html">Try Now</a>
+                        
                     </div>
                     <ul class="footer-links list-reset">
                         <li>
