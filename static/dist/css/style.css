@@ -1419,6 +1419,7 @@ label {
   width: 368px;
   max-width: 368px;
   flex-grow: 1;
+  
 }
 .pricing-table::before {
   content: "";
@@ -1447,6 +1448,8 @@ label {
   padding: 24px;
   height: 100%;
 }
+
+
 .pricing-table-inner > * {
   position: relative;
   width: 100%;
