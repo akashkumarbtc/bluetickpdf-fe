@@ -103,6 +103,7 @@ function displayQuestions(generatedQuestions) {
       questionElement.querySelector(`#question-button-${index}`).style.border = 'none';
       questionElement.querySelector(`#question-button-${index}`).style.borderRadius = '5px';
       questionElement.querySelector(`#question-button-${index}`).style.cursor = 'pointer';
+      questionElement.querySelector(`#question-button-${index}`).style.marginLeft = '70px';
       generatedQuestionsContainer.appendChild(questionElement);
       
       questionElement.querySelector(`#question-button-${index}`).addEventListener('click', (event) => {

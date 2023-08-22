@@ -220,8 +220,8 @@ body {
     width: 100%;
     overflow-wrap: break-word;
     display: flex;
-    gap: var(--section-gap);
-    padding: var(--section-gap);
+    gap: calc(var(--section-gap) - 5px);
+    padding: calc(var(--section-gap) - 5px);
     padding-bottom: 0;
 }
 
@@ -266,6 +266,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 18px;
+    justify-content: center;
 }
 
 .message .content p,
