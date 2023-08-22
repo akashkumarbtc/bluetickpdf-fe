@@ -77,6 +77,29 @@
         .button i {
             margin-right: 5px;
         }
+        
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading-spinner:before {
+            content: "";
+            display: inline-block;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
     </style>
     <script src="static/dist/js/highlight.min.js"></script>
     <script src="static/dist/js/base_url.js"></script>
@@ -168,6 +191,9 @@
         </div>
         <div class="box" id="messages">
             <!-- Display the conversation messages here -->
+            <div id="loading" class="loading-spinner"></div>
+            <div id="generated-questions"></div>
+
         </div>
         <div class="user-input">
             <div class="box input-box">
@@ -190,13 +216,7 @@
                 <input type="checkbox" id="switch" />
                 <label for="switch"></label>
                 <span class="about">Web Access</span>
-            
-
-                
-                 
-                  
-                
-            </div>
+                </div>
         -->
             
             <div class="field">
@@ -234,6 +254,10 @@
 <!-- Add this script after the styles -->
 <script src="static/dist/js/darkmode.js"></script>
 <script>
+
+
+
+
     
     function logout() {
         const user_id = localStorage.getItem("user_id");

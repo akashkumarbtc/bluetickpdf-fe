@@ -13,6 +13,114 @@ const send_button = document.querySelector("#send-button");
 let prompt_lock = false;
 // var baseURL = localStorage.getItem('baseURL');
 
+
+
+const generateQuestionsUrl = base_url + "/generate_questions";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const user_id = localStorage.getItem("user_id");
+  const questionsKey = "generated_questions"; // Key for localStorage
+  
+  if (user_id) {
+      const storedQuestions = localStorage.getItem(questionsKey);
+      
+      if (storedQuestions) {
+          // Questions are stored in localStorage, display them
+          const generatedQuestions = JSON.parse(storedQuestions);
+          displayQuestions(generatedQuestions);
+      } else {
+          // Fetch questions from API and store in localStorage
+          showLoading()
+          const requestData = {
+              user_id: user_id,
+          };
+
+          fetch(generateQuestionsUrl, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestData),
+          })
+          .then((response) => response.json())
+          .then((data) => {
+              const generatedQuestions = data; // Assuming data is an array of questions
+            
+              // Store questions in localStorage
+              localStorage.setItem(questionsKey, JSON.stringify(generatedQuestions));
+              
+              // Display the questions
+              hideLoading()
+              displayQuestions(generatedQuestions);
+          })
+          .catch((error) => {
+              console.error("Error:", error);
+              hideLoading()
+          });
+      }
+  }
+});
+
+function showLoading() {
+  const loadingElement = document.getElementById('loading');
+  loadingElement.style.display = 'block'; // Show the loading spinner
+}
+
+function hideLoading() {
+  const loadingElement = document.getElementById('loading');
+  loadingElement.style.display = 'none'; // Hide the loading spinner
+}
+
+function displayQuestions(generatedQuestions) {
+  const generatedQuestionsContainer = document.getElementById('generated-questions');
+  
+  // Display the GPT image and welcome message only once
+  const welcomeElement = document.createElement('div');
+  welcomeElement.innerHTML = `
+      <div class="message">
+          <div class="user">
+              ${gpt_image} <!-- Add your GPT image here -->
+          </div>
+          <div class="content">
+              <p>Welcome!! try asking me questions related to your file. You can ask questions like:</p>
+          </div>
+      </div>
+  `;
+  generatedQuestionsContainer.appendChild(welcomeElement);
+  
+  generatedQuestions.forEach((question, index) => {
+      const questionElement = document.createElement('div');
+      questionElement.innerHTML = `
+          <div class="message">
+              <div class="content">
+                  <button class="question-button" id="question-button-${index}" >${format(question)}</button>
+              </div>
+          </div>
+      `;
+      questionElement.querySelector(`#question-button-${index}`).style.backgroundColor = '#0270d7';
+      questionElement.querySelector(`#question-button-${index}`).style.color = 'white';
+      questionElement.querySelector(`#question-button-${index}`).style.padding = '10px 20px';
+      questionElement.querySelector(`#question-button-${index}`).style.border = 'none';
+      questionElement.querySelector(`#question-button-${index}`).style.borderRadius = '5px';
+      questionElement.querySelector(`#question-button-${index}`).style.cursor = 'pointer';
+      generatedQuestionsContainer.appendChild(questionElement);
+      
+      questionElement.querySelector(`#question-button-${index}`).addEventListener('click', (event) => {
+          // Do something when the button is clicked
+          // For example, ask the question to the chatbot
+          const clickedQuestion = generatedQuestions[index];
+          ask_gpt(clickedQuestion);
+      });
+  });
+}
+
+
+
+
+
+
+
+
 const format = (text) => {
   return text.replace(/(?:\r\n|\r|\n)/g, "<br>");
 };
@@ -307,7 +415,37 @@ const new_conversation = async () => {
 
   await clear_conversation();
   await load_conversations(20, 0, true);
+
+  // Fetch questions from API and display them
+  showLoading();
+  const requestData = {
+    user_id: localStorage.getItem("user_id") // Fetch user_id from localStorage or wherever you get it from
+  };
+
+  fetch(generateQuestionsUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const generatedQuestions = data; // Assuming data is an array of questions
+      
+      // Store questions in localStorage
+      localStorage.setItem(questionsKey, JSON.stringify(generatedQuestions));
+      
+      // Display the questions
+      hideLoading();
+      displayQuestions(generatedQuestions);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      hideLoading();
+    });
 };
+
 
 const load_conversation = async (conversation_id) => {
   let conversation = await JSON.parse(
