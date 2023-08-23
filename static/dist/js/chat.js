@@ -105,15 +105,22 @@ function displayQuestions(generatedQuestions) {
       questionElement.querySelector(`#question-button-${index}`).style.cursor = 'pointer';
       questionElement.querySelector(`#question-button-${index}`).style.marginLeft = '70px';
       generatedQuestionsContainer.appendChild(questionElement);
+  });
+  
+  // Add a single event listener to the container to handle button clicks
+  generatedQuestionsContainer.addEventListener('click', (event) => {
+    const clickedButton = event.target.closest('.question-button');
+    if (clickedButton) {
+      // Remove welcome message and questions when a button is clicked
+      generatedQuestionsContainer.innerHTML = '';
       
-      questionElement.querySelector(`#question-button-${index}`).addEventListener('click', (event) => {
-          // Do something when the button is clicked
-          // For example, ask the question to the chatbot
-          const clickedQuestion = generatedQuestions[index];
-          ask_gpt(clickedQuestion);
-      });
+      const index = parseInt(clickedButton.id.split('-')[2]);
+      const clickedQuestion = generatedQuestions[index];
+      ask_gpt(clickedQuestion);
+    }
   });
 }
+
 
 
 
@@ -417,35 +424,46 @@ const new_conversation = async () => {
   await clear_conversation();
   await load_conversations(20, 0, true);
 
-  // Fetch questions from API and display them
-  showLoading();
-  const requestData = {
-    user_id: localStorage.getItem("user_id") // Fetch user_id from localStorage or wherever you get it from
-  };
+  // Fetch questions from localStorage if available
+  const storedQuestions = localStorage.getItem(questionsKey);
 
-  fetch(generateQuestionsUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(requestData),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const generatedQuestions = data; // Assuming data is an array of questions
-      
-      // Store questions in localStorage
-      localStorage.setItem(questionsKey, JSON.stringify(generatedQuestions));
-      
-      // Display the questions
-      hideLoading();
-      displayQuestions(generatedQuestions);
+  if (storedQuestions) {
+    // Questions are stored in localStorage, display them
+    const generatedQuestions = JSON.parse(storedQuestions);
+    hideLoading();
+    displayQuestions(generatedQuestions);
+  } else {
+    // Fetch questions from API and display them
+    showLoading();
+    const requestData = {
+      user_id: localStorage.getItem("user_id"), // Fetch user_id from localStorage or wherever you get it from
+    };
+
+    fetch(generateQuestionsUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestData),
     })
-    .catch((error) => {
-      console.error("Error:", error);
-      hideLoading();
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        const generatedQuestions = data; // Assuming data is an array of questions
+        
+        // Store questions in localStorage
+        localStorage.setItem(questionsKey, JSON.stringify(generatedQuestions));
+        
+        // Display the questions
+        hideLoading();
+        displayQuestions(generatedQuestions);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        hideLoading();
+      });
+  }
 };
+
 
 
 const load_conversation = async (conversation_id) => {
