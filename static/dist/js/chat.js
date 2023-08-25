@@ -655,6 +655,7 @@ document.querySelector(".mobile-sidebar").addEventListener("click", (event) => {
   window.scrollTo(0, 0);
 });
 
+/*
 function logout() {
   const user_id = localStorage.getItem("user_id");
 
@@ -696,4 +697,4 @@ function checkUserAndLogout() {
 }
 
 // Call the checkUserAndLogout function every 1000 milliseconds (1 second)
-setInterval(checkUserAndLogout, 1000);
+setInterval(checkUserAndLogout, 1000);*/

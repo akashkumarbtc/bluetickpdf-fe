@@ -291,16 +291,55 @@
         }
     }
   
-  // Function to continuously check user_id and log out if not present
-  function checkUserAndLogout() {
+// Function to continuously check user_id, log out if not present, and check the protected route
+function checkUserLogoutAndProtectedRoute() {
+    // Retrieve the token from local storage
+    const token = localStorage.getItem('token');
+
+    // Retrieve the user_id from local storage
     const user_id = localStorage.getItem("user_id");
-    if (!user_id) {
+
+    // Check if both token and user_id are available
+    if (token && user_id) {
+        // Include the token in the Authorization header
+        const headers = new Headers({
+            'Authorization': `Bearer ${token}`
+        });
+
+        fetch(base_url + '/protected_route', { method: 'GET', headers: headers })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.message) {
+                console.log(data.message); // Process the successful response from the server
+            }
+            if (data.error) {
+                console.log(data.error);
+                logout(); // Call the logout function to log the user out
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+
+            // Remove token and user_id from local storage on error
+            localStorage.removeItem('token');
+            localStorage.removeItem('user_id');
+        });
+
+    } else {
         logout();
     }
-  }
-  
-  // Call the checkUserAndLogout function every 1000 milliseconds (1 second)
-  setInterval(checkUserAndLogout, 1000);
+}
+
+// Call the checkUserLogoutAndProtectedRoute function initially
+checkUserLogoutAndProtectedRoute();
+
+// Call the checkUserLogoutAndProtectedRoute function every 10 minutes (600000 milliseconds)
+setInterval(checkUserLogoutAndProtectedRoute, 600001); // 10 minutes
   </script>
   
 </body>
