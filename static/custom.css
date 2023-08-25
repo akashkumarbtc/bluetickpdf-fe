@@ -1,5 +1,6 @@
-
-
 @media (max-width: 918px) {
     .toggle-switch { margin: 10px 20px 10px 0; }
+}
+@media (max-width: 320px) {
+    .feature-box { margin: 0; width: 290px; }
 }
