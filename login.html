@@ -538,6 +538,12 @@
                     localStorage.setItem("token", token);
                     localStorage.setItem("user_id", user_id);
 
+                                // Add the Authorization header to subsequent requests
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            };
+
                     // Redirect to upload.html
                     window.location.href = "upload.html";
                 } else {

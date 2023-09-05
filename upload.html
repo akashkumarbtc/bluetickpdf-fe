@@ -578,7 +578,7 @@
 
 
 // Function to continuously check user_id, log out if not present, and check the protected route
-function checkUserLogoutAndProtectedRoute() {
+/*function checkUserLogoutAndProtectedRoute() {
     // Retrieve the token from local storage
     const token = localStorage.getItem('token');
 
@@ -625,7 +625,7 @@ function checkUserLogoutAndProtectedRoute() {
 checkUserLogoutAndProtectedRoute();
 
 // Call the checkUserLogoutAndProtectedRoute function every 10 minutes (600000 milliseconds)
-setInterval(checkUserLogoutAndProtectedRoute, 600001); // 10 minutes
+setInterval(checkUserLogoutAndProtectedRoute, 10000); // 10 minutes */
 
 
 
@@ -727,6 +727,9 @@ setInterval(checkUserLogoutAndProtectedRoute, 600001); // 10 minutes
             })
                 .then((response) => {
                     // Handle the response here if needed
+                    if(response.status === 401 ){
+                        logout();
+                    }
                     console.log(response);
                     hideLoadingSpinner();
                     // Display the loader for 6 seconds before redirecting to /ask
@@ -734,6 +737,11 @@ setInterval(checkUserLogoutAndProtectedRoute, 600001); // 10 minutes
                 })
                 .catch((error) => {
                     // Handle errors here if needed
+                    if(error.status === 401 ){
+                        console.log("status error")
+                        logout();
+                    }
+                    
                     console.error(error);
                     hideLoadingSpinner();
                 });
@@ -825,7 +833,7 @@ setInterval(checkUserLogoutAndProtectedRoute, 600001); // 10 minutes
                         localStorage.removeItem("token");
                         localStorage.removeItem("user_id");
                         localStorage.clear();
-                        window.location.href = "index.html";
+                        window.location.href = "login.html";
                     })
                     .catch(error => {
                         showCustomPopup(error.message);

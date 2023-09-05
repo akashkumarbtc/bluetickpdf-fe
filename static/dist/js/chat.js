@@ -19,6 +19,7 @@ const generateQuestionsUrl = base_url + "/generate_questions";
 
 document.addEventListener("DOMContentLoaded", () => {
   const user_id = localStorage.getItem("user_id");
+  const token = localStorage.getItem("token");
   const questionsKey = "generated_questions"; // Key for localStorage
   
   if (user_id) {
@@ -34,12 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
           const requestData = {
               user_id: user_id,
           };
+          const headers = new Headers();
+          headers.append("Authorization", token);
 
           fetch(generateQuestionsUrl, {
               method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-              },
+              headers: headers,
               body: JSON.stringify(requestData),
           })
           .then((response) => response.json())
@@ -206,7 +207,7 @@ const ask_gpt = async (message) => {
                     ${user_image}
                     
                 </div>
-                <div class="content" id="user_${token}"> 
+                <div class="content" id="user_${window.token}"> 
                     ${format(message)}
                 </div>
             </div>
@@ -240,17 +241,17 @@ const ask_gpt = async (message) => {
     window.scrollTo(0, 0);
     user_id = localStorage.getItem("user_id")
 
-    if(!user_id) {
-      console.log("No user id.. Logging out !!")
-      logout()
-    }
+    
     // const csrfToken = document.querySelector('input[name="csrf_token"]').value;
+    const token = localStorage.getItem("token");
+    // headers.append("Authorization", token);
     const response = await fetch(base_url + `/ask`, {
       method: `POST`,
       signal: window.controller.signal,
       headers: {
         // "X-CSRF-Token": csrfToken,
         "content-type": `application/json`,
+        "Authorization":token,
         accept: `text/event-stream`,
       },
       body: JSON.stringify({
@@ -275,7 +276,15 @@ const ask_gpt = async (message) => {
         },
       }),
     });
-
+        // Check the response status
+        if (response.status === 401) {
+          logout(); // Call the logout function here
+      } else {
+          // Handle the response here if needed
+          console.log(response);
+          // Your other code for handling the response
+      }
+  
     const reader = response.body.getReader();
 
     while (true) {
@@ -443,6 +452,7 @@ const new_conversation = async () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization":token
       },
       body: JSON.stringify(requestData),
     })
@@ -655,7 +665,6 @@ document.querySelector(".mobile-sidebar").addEventListener("click", (event) => {
   window.scrollTo(0, 0);
 });
 
-/*
 function logout() {
   const user_id = localStorage.getItem("user_id");
 
@@ -687,14 +696,3 @@ function logout() {
       window.location.href = "login.html";
   }
 }
-
-// Function to continuously check user_id and log out if not present
-function checkUserAndLogout() {
-  const user_id = localStorage.getItem("user_id");
-  if (!user_id) {
-    logout();
-  }
-}
-
-// Call the checkUserAndLogout function every 1000 milliseconds (1 second)
-setInterval(checkUserAndLogout, 1000);*/
