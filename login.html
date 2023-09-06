@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" href="static/dist/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
     <script src="https://unpkg.com/scrollreveal@4.0.0/static/dist/scrollreveal.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -98,7 +99,9 @@
             cursor: pointer;
             font-weight: bold;
         }
-
+        .form-field input[type="submit"]:hover {
+            background-color: #02579F;
+        }
         .form-field button {
             display: block;
             width: 100%;
@@ -110,15 +113,15 @@
             cursor: pointer;
         }
 
-        .form-field button.button-google {
+        .form-field #google {
             background-color: #DB4437;
         }
 
-        .form-field button.button-primary:hover {
+        .form-field .button:hover {
             background-color: #02579F;
         }
 
-        .form-field button.button-google:hover {
+        .form-field #google:hover {
             background-color: #C11E0B;
         }
 
@@ -392,6 +395,13 @@
                                 <div class="form-field">
                                     <input id="submit" name="submit" type="submit" value="Login">
                                 </div>
+                                <div class="form-field">
+                                    <button id="google" name="submit" type="submit">
+                                        <i class="fab fa-google" ></i>  Sign in with Google
+                                    </button>
+                                </div>
+                                
+                                
                                 <div class="form-field">
                                     <div class="side-by-side-links">
                                         <a href="forgot_password.html">Forgot Password?</a>
