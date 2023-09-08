@@ -404,13 +404,13 @@
                                 <div class="form-field">
                                     <input id="submit" name="submit" type="submit" value="Login">
                                 </div>
-                                <!--
+                                
                                 <div class="form-field">
-                                    <button id="google" name="submit" type="submit">
+                                    <button id="google">
                                         <i class="fab fa-google" ></i>  Sign in with Google
                                     </button>
                                 </div>
-                                -->
+                                
                                 
                                 <div class="form-field">
                                     <div class="side-by-side-links">
@@ -498,6 +498,48 @@
 <script src="static/dist/js/darkmode.js"></script>
 <script>
     // var baseURL = localStorage.getItem('baseURL');
+
+// Frontend JavaScript
+async function initiateGoogleLogin() {
+    try {
+        const authorization_response = window.location.href;
+        const response = await fetch(base_url + "/google_login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({}),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            // Redirect the user to the Google OAuth page
+            window.location.href = data.authorization_url;
+        } else {
+            console.error(data.error);
+        }
+
+        
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// Attach a click event listener to the Google login button
+const googleLoginButton = document.getElementById("google");
+googleLoginButton.addEventListener("click", initiateGoogleLogin);
+
+// Check if the URL contains a query parameter indicating a successful login
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has("login_success")) {
+    // Redirect to the 'upload.html' page
+    window.location.href = "upload.html";
+}
+    
+
+
+
+
     function showCustomPopup(message, isError) {
         var popup = document.getElementById('custom-popup');
         var popupMessage = popup.querySelector('.popup-message');
