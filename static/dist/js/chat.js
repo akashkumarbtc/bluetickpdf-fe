@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
   const questionsKey = "generated_questions"; // Key for localStorage
   
-  if (user_id) {
+  if (token) {
       const storedQuestions = localStorage.getItem(questionsKey);
       
       if (storedQuestions) {

@@ -518,8 +518,6 @@ async function initiateGoogleLogin() {
         } else {
             console.error(data.error);
         }
-
-        
     } catch (error) {
         console.error(error);
     }
@@ -530,11 +528,18 @@ const googleLoginButton = document.getElementById("google");
 googleLoginButton.addEventListener("click", initiateGoogleLogin);
 
 // Check if the URL contains a query parameter indicating a successful login
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has("login_success")) {
-    // Redirect to the 'upload.html' page
-    window.location.href = "upload.html";
-}
+window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('token') == null) {
+        const queryParams = new URLSearchParams(window.location.search);
+        const token = queryParams.get('jwt');
+        if (token) {
+            localStorage.setItem('token', token);
+            window.location.href = 'upload.html';
+        }
+    }
+});
+
+
     
 
 
