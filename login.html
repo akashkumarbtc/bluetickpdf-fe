@@ -532,8 +532,10 @@ window.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('token') == null) {
         const queryParams = new URLSearchParams(window.location.search);
         const token = queryParams.get('jwt');
+        const user_id = queryParams.get('user_id')
         if (token) {
             localStorage.setItem('token', token);
+            localStorage.setItem('user_id',user_id)
             window.location.href = 'upload.html';
         }
     }
