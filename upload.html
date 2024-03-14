@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PDF Upload - BluetickPDF</title>
+    <title>PDF Upload - PrivacyDoc</title>
     <link rel="icon" href="static/dist/images/gpt.png">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -825,33 +825,41 @@ setInterval(checkUserLogoutAndProtectedRoute, 10000); // 10 minutes */
 
         function logout() {
             const user_id = localStorage.getItem("user_id");
+            const db_present = localStorage.getItem('db_present')
 
             if (user_id) {
                 var data = {
                     user_id: user_id,
                 };
+                localStorage.removeItem("token");
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("db_present");
+            localStorage.clear();
+            window.location.href = db_present === "true" || db_present === true ? 'login.html?session-restore=True' : 'login.html';
 
-                fetch(base_url + '/logout', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                    .then(response => {
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("user_id");
-                        localStorage.clear();
-                        window.location.href = "login.html";
-                    })
-                    .catch(error => {
-                        showCustomPopup(error.message);
-                    });
+                // fetch(base_url + '/logout', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify(data)
+                // })
+                //     .then(response => {
+                //         localStorage.removeItem("token");
+                //         localStorage.removeItem("user_id");
+                //         localStorage.clear();
+                //         window.location.href = "login.html";
+                //     })
+                //     .catch(error => {
+                //         showCustomPopup(error.message);
+                //     });
             } else {
                 // Redirect to the login page
                 const popupMessage = "Session expired. Please login again.";
                 localStorage.setItem("popupMessage", popupMessage);
-                window.location.href = "login.html";
+                const db_present = localStorage.getItem('db_present')
+            window.location.href = db_present === "true" || db_present === true ? 'login.html?session-restore=True' : 'login.html';
+                // window.location.href = "login.html";
             }
         }
 

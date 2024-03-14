@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - BluetickPDF</title>
+    <title>Login - PrivacyDoc</title>
     <link rel="icon" href="static/dist/images/gpt.png">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" href="static/dist/css/style.css">
@@ -502,6 +502,9 @@
 // Frontend JavaScript
 async function initiateGoogleLogin() {
     try {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user_id");
+        localStorage.clear();
         const authorization_response = window.location.href;
         const response = await fetch(base_url + "/google_login", {
             method: "POST",
@@ -533,10 +536,13 @@ window.addEventListener('DOMContentLoaded', () => {
         const queryParams = new URLSearchParams(window.location.search);
         const token = queryParams.get('jwt');
         const user_id = queryParams.get('user_id')
+        const db_present = queryParams.get('db_present')
         if (token) {
             localStorage.setItem('token', token);
-            localStorage.setItem('user_id',user_id)
-            window.location.href = 'upload.html';
+            localStorage.setItem('user_id', user_id)
+            localStorage.setItem('db_present', db_present)
+            window.location.href = db_present === "true" || db_present === true ? 'chatbot.html?session-restore=True' : 'upload.html';
+
         }
     }
 });
@@ -578,6 +584,10 @@ window.addEventListener('DOMContentLoaded', () => {
         var passwordInput = document.querySelector('#password');
         var username = usernameInput.value.trim();
         var password = passwordInput.value;
+        localStorage.removeItem("token");
+        localStorage.removeItem("user_id");
+        localStorage.removeItem("db_present");
+        localStorage.clear();
 
         var data = {
             email: username,
@@ -585,7 +595,17 @@ window.addEventListener('DOMContentLoaded', () => {
         };
         console.log(data)
 
-        fetch(base_url + '/login', {
+        let api_url = "/login"
+
+        const url = window.location.href;
+        console.log(url)
+        if (url.includes('session-restore=True')) {
+            api_url = "/login?session-restore=True"
+        }
+
+        console.log(api_url)
+
+        fetch(base_url + api_url , {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -602,10 +622,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 } else if (data.token && data.user_id) {
                     const token = data.token;
                     const user_id = data.user_id;
+                    const db_present = data.db_present
 
                     // Save the token and user_id in localStorage or session
                     localStorage.setItem("token", token);
                     localStorage.setItem("user_id", user_id);
+                    localStorage.setItem("db_present", db_present);
 
                                 // Add the Authorization header to subsequent requests
             const headers = {
@@ -614,7 +636,9 @@ window.addEventListener('DOMContentLoaded', () => {
             };
 
                     // Redirect to upload.html
-                    window.location.href = "upload.html";
+                    window.location.href = db_present === "true" || db_present === true ? 'chatbot.html?session-restore=True' : 'upload.html';
+
+                   
                 } else {
                     showCustomPopup("Login failed. Please check your credentials.",true);
                 }
