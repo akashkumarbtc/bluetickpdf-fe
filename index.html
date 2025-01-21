@@ -91,7 +91,11 @@
         .pricing-tables-wrap, .pricing-table-features-title, .pricing-table-features span {color: black;}
         .pricing-table-inner {background-color: red;}
     </style>
-    <link rel="stylesheet" href='static/custom.css'>
+    <link rel="stylesheet" href='static/custom.css' />
+
+    <!-- Start - Google Recaptcha -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfgldwZAAAAADeTMC2XW-EgDMfYPhnH0MiIOls6"></script>
+    <!-- End - Google Recaptcha -->
 </head>
 
 <body class="is-boxed has-animations" id="body">
@@ -132,18 +136,16 @@
                                     <div class="modal-content">
                                         <span class="close-btn">&times;</span>
                                         <h2>Contact Us</h2>
-                                        <form id="contactFormContent"
-                                            action="https://getform.io/f/dd6959a0-03be-4ca3-9e8d-311247da71f4"
-                                            method="POST">
+                                        <form id="contactFormContent">
                                             <label for="name">Name:</label>
                                             <input type="text" id="name" name="name" required>
                                             <label for="email">Email:</label>
                                             <input type="email" id="email" name="email" required>
                                             <label for="message">Message:</label>
                                             <textarea id="message" name="message" rows="4" required></textarea>
-                                            <!-- add hidden Honeypot input to prevent spams -->
-                                            <input type="hidden" name="_gotcha" style="display:none !important">
-                                            <button type="submit">Submit</button>
+                                            <input type="hidden" id="captchaResponse" name="g-recaptcha-response">
+                                            <!-- <button type="submit">Submit</button> -->
+                                             <input type="submit" value="Submit">
                                         </form>
                                     </div>
                                 </div>
@@ -386,44 +388,89 @@
                 }
             });
 
+            
             // Form submission
-            const contactForm = document.getElementById("contactFormContent");
+            // const contactForm = document.getElementById("contactFormContent");
 
-            contactForm.addEventListener("submit", async (event) => {
-                event.preventDefault();
+            // contactForm.addEventListener("submit", async (event) => {
+            //     event.preventDefault();
 
-                // Add loading spinner or other UI changes if needed
-                // showLoadingSpinner();
+            //     // Add loading spinner or other UI changes if needed
+            //     // showLoadingSpinner();
 
-                // Submit the form using Fetch API
-                const formData = new FormData(contactForm);
-                try {
-                    const response = await fetch(contactForm.action, {
-                        method: "POST",
-                        body: formData,
+            //     // Submit the form using Fetch API
+            //     const formData = new FormData(contactForm);
+            //     try {
+            //         const response = await fetch(contactForm.action, {
+            //             method: "POST",
+            //             body: formData,
+            //         });
+
+            //         // Handle response here (e.g., show success message or reset the form)
+            //         if (response.ok) {
+            //             // Show success message or perform other actions
+            //             console.log("Form submitted successfully");
+            //             // Hide the modal
+            //             contactFormModal.style.display = "none";
+            //         } else {
+            //             console.error("Form submission failed");
+            //             // Handle error (show error message, reset form, etc.)
+            //         }
+            //     } catch (error) {
+            //         console.error("An error occurred:", error);
+            //         // Handle error (show error message, reset form, etc.)
+            //     } finally {
+            //         // Hide loading spinner or revert UI changes
+            //         // hideLoadingSpinner();
+            //     }
+            // });
+
+
+        });
+    </script>
+    <script>
+        document.getElementById('contactFormContent').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+    
+            grecaptcha.ready(function () {
+                grecaptcha.execute("6LfgldwZAAAAADeTMC2XW-EgDMfYPhnH0MiIOls6").then(function (token) {
+                    document.getElementById("captchaResponse").value = token; // Set reCAPTCHA token
+    
+                    const webhookUrl = 'https://hooks.slack.com/services/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';
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    const pageUrl = window.location.href;
+    
+                    const payload = {
+                        text: `New Contact Form Submission:\nName: ${name}\nEmail: ${email}\nMessage: ${message}\nForm Submitted Page URL: ${pageUrl}`
+                    };
+    
+                    console.log("Payload:", payload);
+    
+                    fetch(webhookUrl, {
+                        method: 'POST',
+                        body: JSON.stringify(payload)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Thank you for writing to us. We value your feedback.');
+                            location.href = document.referrer; // Redirect after submission
+                        } else {
+                            alert('Error submitting form');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error submitting form');
                     });
-
-                    // Handle response here (e.g., show success message or reset the form)
-                    if (response.ok) {
-                        // Show success message or perform other actions
-                        console.log("Form submitted successfully");
-                        // Hide the modal
-                        contactFormModal.style.display = "none";
-                    } else {
-                        console.error("Form submission failed");
-                        // Handle error (show error message, reset form, etc.)
-                    }
-                } catch (error) {
-                    console.error("An error occurred:", error);
-                    // Handle error (show error message, reset form, etc.)
-                } finally {
-                    // Hide loading spinner or revert UI changes
-                    // hideLoadingSpinner();
-                }
+                }).catch(function (error) {
+                    console.error("reCAPTCHA error:", error);
+                    alert('reCAPTCHA verification failed. Please try again.');
+                });
             });
         });
     </script>
-
 
 </body>
 
